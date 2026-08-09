@@ -38,7 +38,7 @@
       inset: 0;
       width: 100vw;
       height: 100vh;
-      padding: 42px 78px 86px;
+      padding: 42px 78px 110px;
       overflow: hidden;
       background:
         radial-gradient(circle at top right, rgba(250, 204, 21, 0.18), transparent 28%),
@@ -295,17 +295,20 @@
     }
 
     .controls {
-      position: fixed;
-      right: 28px;
-      bottom: 18px;
-      z-index: 9999;
-      display: flex;
-      gap: 10px;
-      align-items: center;
-      justify-content: center;
-      background: transparent;
-      width: auto;
-      height: auto;
+      position: fixed !important;
+      left: 0 !important;
+      right: 0 !important;
+      bottom: 0 !important;
+      height: 58px !important;
+      z-index: 9999 !important;
+      display: flex !important;
+      gap: 10px !important;
+      align-items: center !important;
+      justify-content: flex-end !important;
+      padding: 8px 28px !important;
+      background: rgba(2, 6, 23, 0.45) !important;
+      backdrop-filter: blur(8px) !important;
+      border-top: 1px solid rgba(255, 255, 255, 0.08) !important;
     }
 
     button {
@@ -390,7 +393,7 @@
 
     @media (max-width: 900px) {
       .slide {
-        padding: 42px 28px 86px;
+        padding: 42px 28px 110px;
       }
 
       h1 {
@@ -459,9 +462,13 @@
       }
 
       .controls {
-        right: 12px;
-        bottom: 12px;
-        gap: 8px;
+        left: 0 !important;
+        right: 0 !important;
+        bottom: 0 !important;
+        height: 56px !important;
+        justify-content: center !important;
+        padding: 8px 10px !important;
+        gap: 8px !important;
       }
 
       button {
