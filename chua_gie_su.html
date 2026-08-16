@@ -1,0 +1,1269 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Bài 5 - Đức Chúa Jesus Christ | Slide HTML</title>
+
+  <style>
+  * {
+    box-sizing: border-box;
+  }
+
+  html,
+  body {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    background: #020617 !important;
+    overflow: hidden !important;
+    font-family: "Segoe UI", Arial, sans-serif;
+    color: #f8fafc;
+  }
+
+  .presentation {
+    width: 100vw !important;
+    height: 100vh !important;
+    position: relative !important;
+    overflow: hidden !important;
+    background:
+      radial-gradient(circle at top left, rgba(59, 130, 246, 0.22), transparent 36%),
+      radial-gradient(circle at bottom right, rgba(245, 158, 11, 0.16), transparent 34%),
+      #020617 !important;
+  }
+
+  .slide {
+    width: 100vw !important;
+    height: 100vh !important;
+    min-width: 100vw !important;
+    min-height: 100vh !important;
+    position: absolute !important;
+    inset: 0 !important;
+    overflow: hidden !important;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 58px 72px 92px;
+  }
+
+  .slide.active {
+    display: flex !important;
+    animation: fadeIn 0.35s ease-in-out;
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .content {
+    width: 100%;
+    max-width: 1180px;
+    max-height: calc(100vh - 145px);
+    overflow: hidden;
+  }
+
+  .title-slide {
+    text-align: center;
+  }
+
+  h1 {
+    font-size: clamp(42px, 6vw, 78px);
+    line-height: 1.06;
+    margin: 0 0 18px;
+    letter-spacing: -1.5px;
+    color: #ffffff;
+  }
+
+  h2 {
+    font-size: clamp(34px, 4.6vw, 56px);
+    line-height: 1.12;
+    margin: 0;
+    color: #ffffff;
+  }
+
+  h3 {
+    font-size: clamp(21px, 2.2vw, 30px);
+    margin: 0 0 14px;
+    color: #bfdbfe;
+  }
+
+  p {
+    font-size: clamp(17px, 1.45vw, 22px);
+    line-height: 1.45;
+    margin: 12px 0;
+    color: #e5e7eb;
+  }
+
+  ul,
+  ol {
+    margin: 18px 0;
+    padding-left: 30px;
+  }
+
+  li {
+    font-size: clamp(17px, 1.42vw, 22px);
+    line-height: 1.42;
+    margin-bottom: 9px;
+    color: #f1f5f9;
+  }
+
+  strong {
+    color: #fde68a;
+  }
+
+  .subtitle {
+    color: #bfdbfe;
+    font-size: clamp(22px, 2.3vw, 32px);
+    margin-bottom: 24px;
+  }
+
+  .divider {
+    width: 120px;
+    height: 5px;
+    border-radius: 999px;
+    background: linear-gradient(90deg, #f59e0b, #3b82f6);
+    margin: 18px 0 26px;
+  }
+
+  .title-slide .divider {
+    margin: 18px auto 28px;
+  }
+
+  .focus-box,
+  .verse,
+  .card,
+  .main-box {
+    border: 1px solid rgba(148, 163, 184, 0.35);
+    background: rgba(15, 23, 42, 0.78);
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.28);
+    backdrop-filter: blur(12px);
+    border-radius: 22px;
+  }
+
+  .focus-box {
+    padding: 24px 30px;
+    margin: 26px auto;
+    max-width: 980px;
+  }
+
+  /* =====================================================
+     CÂU KINH THÁNH — NỔI BẬT NHẤT
+  ===================================================== */
+
+  .verse {
+    position: relative;
+    padding: 26px 32px 28px 36px;
+    margin: 24px 0;
+    border-left: 12px solid #facc15;
+    border-top: 1px solid rgba(250, 204, 21, 0.45);
+    border-right: 1px solid rgba(250, 204, 21, 0.28);
+    border-bottom: 1px solid rgba(250, 204, 21, 0.28);
+    background:
+      linear-gradient(135deg, rgba(250, 204, 21, 0.16), rgba(37, 99, 235, 0.18)),
+      rgba(15, 23, 42, 0.94);
+    box-shadow:
+      0 0 0 1px rgba(250, 204, 21, 0.18),
+      0 24px 70px rgba(250, 204, 21, 0.12),
+      0 24px 70px rgba(0, 0, 0, 0.36);
+    color: #ffffff;
+  }
+
+  .verse::before {
+    content: "📖";
+    position: absolute;
+    top: -18px;
+    right: 24px;
+    font-size: 42px;
+    opacity: 0.95;
+    filter: drop-shadow(0 6px 14px rgba(0, 0, 0, 0.45));
+  }
+
+  .verse strong {
+    display: block;
+    margin-bottom: 12px;
+    color: #facc15;
+    font-size: clamp(26px, 2.85vw, 42px);
+    line-height: 1.1;
+    font-weight: 900;
+    letter-spacing: -0.5px;
+    text-shadow: 0 3px 16px rgba(250, 204, 21, 0.18);
+  }
+
+  .verse {
+    font-size: clamp(25px, 2.65vw, 40px);
+    line-height: 1.35;
+    font-weight: 750;
+  }
+
+  .verse br {
+    line-height: 1.8;
+  }
+
+  /* Khi câu Kinh Thánh nằm trong card thì vẫn nổi bật nhưng nhỏ hơn một chút */
+  .card .verse {
+    padding: 18px 22px 20px 24px;
+    margin: 14px 0;
+    border-left-width: 8px;
+    font-size: clamp(19px, 1.65vw, 26px);
+  }
+
+  .card .verse strong {
+    font-size: clamp(21px, 1.85vw, 29px);
+  }
+
+  .card .verse::before {
+    font-size: 30px;
+    top: -14px;
+    right: 16px;
+  }
+
+  .main-point {
+    color: #fbbf24;
+    font-weight: 800;
+  }
+
+  .blue-point {
+    color: #93c5fd;
+    font-weight: 800;
+  }
+
+  .green-point {
+    color: #86efac;
+    font-weight: 800;
+  }
+
+  .red-point {
+    color: #fca5a5;
+    font-weight: 800;
+  }
+
+  .two-columns {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 22px;
+    margin: 20px 0;
+  }
+
+  .three-columns {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 18px;
+    margin: 20px 0;
+  }
+
+  .card {
+    padding: 20px 22px;
+  }
+
+  .card h3 {
+    color: #fde68a;
+  }
+
+  .card p,
+  .card li {
+    font-size: clamp(15px, 1.22vw, 19px);
+  }
+
+  .main-box {
+    padding: 24px 28px;
+    margin: 22px 0;
+    border-left: 6px solid #3b82f6;
+  }
+
+  .number-list {
+    list-style: none;
+    padding-left: 0;
+    counter-reset: item;
+  }
+
+  .number-list li {
+    counter-increment: item;
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+  }
+
+  .number-list li::before {
+    content: counter(item);
+    width: 36px;
+    height: 36px;
+    min-width: 36px;
+    border-radius: 999px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, #f59e0b, #2563eb);
+    color: #fff;
+    font-weight: 800;
+    font-size: 18px;
+    margin-top: 1px;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+    border-radius: 18px;
+    overflow: hidden;
+    background: rgba(15, 23, 42, 0.75);
+  }
+
+  th,
+  td {
+    border: 1px solid rgba(148, 163, 184, 0.32);
+    padding: 14px 16px;
+    text-align: left;
+    vertical-align: top;
+    color: #f8fafc;
+    font-size: clamp(15px, 1.28vw, 20px);
+  }
+
+  th {
+    background: rgba(37, 99, 235, 0.35);
+    color: #bfdbfe;
+  }
+
+  .slide-icon {
+    position: absolute;
+    right: 54px;
+    top: 40px;
+    font-size: 56px;
+    opacity: 0.22;
+    filter: drop-shadow(0 8px 20px rgba(0,0,0,0.3));
+  }
+
+  .title-slide .slide-icon {
+    position: static;
+    font-size: 72px;
+    opacity: 1;
+    margin-top: 18px;
+  }
+
+  .footer {
+    position: absolute;
+    left: 42px;
+    right: 42px;
+    bottom: 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: #94a3b8;
+    font-size: 14px;
+  }
+
+  .progress {
+    position: fixed;
+    left: 0;
+    top: 0;
+    height: 5px;
+    background: linear-gradient(90deg, #f59e0b, #3b82f6, #22c55e);
+    width: 0%;
+    z-index: 9999;
+    transition: width 0.2s ease;
+  }
+
+  .hint {
+    position: fixed;
+    top: 16px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 9999;
+    color: #cbd5e1;
+    background: rgba(15, 23, 42, 0.72);
+    border: 1px solid rgba(148, 163, 184, 0.25);
+    padding: 8px 14px;
+    border-radius: 999px;
+    font-size: 13px;
+    max-width: calc(100vw - 40px) !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    white-space: nowrap !important;
+  }
+
+  .controls {
+    position: fixed !important;
+    left: 50% !important;
+    right: auto !important;
+    bottom: 18px !important;
+    transform: translateX(-50%) !important;
+    z-index: 9999 !important;
+    display: flex !important;
+    gap: 10px !important;
+    align-items: center !important;
+    justify-content: center !important;
+  }
+
+  .controls button,
+  .slide-counter {
+    white-space: nowrap !important;
+  }
+
+  button {
+    border: 1px solid rgba(148, 163, 184, 0.35);
+    background: rgba(30, 41, 59, 0.9);
+    color: #fff;
+    border-radius: 999px;
+    padding: 10px 16px;
+    cursor: pointer;
+    font-weight: 700;
+    font-size: 14px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.28);
+  }
+
+  button:hover {
+    background: rgba(37, 99, 235, 0.95);
+  }
+
+  .slide-counter {
+    padding: 10px 16px;
+    border-radius: 999px;
+    background: rgba(15, 23, 42, 0.88);
+    color: #e2e8f0;
+    border: 1px solid rgba(148, 163, 184, 0.35);
+    font-weight: 700;
+    min-width: 76px;
+    text-align: center;
+  }
+
+  .small {
+    font-size: clamp(15px, 1.25vw, 19px);
+    color: #cbd5e1;
+  }
+
+  @media (max-width: 900px) {
+    html,
+    body {
+      width: 100%;
+      height: 100%;
+      overflow: hidden !important;
+    }
+
+    .presentation {
+      width: 100vw !important;
+      height: 100vh !important;
+      overflow: hidden !important;
+    }
+
+    .slide {
+      width: 100vw !important;
+      height: 100vh !important;
+      min-height: 100vh !important;
+      position: absolute !important;
+      inset: 0 !important;
+      padding: 42px 28px 82px !important;
+      overflow: hidden !important;
+    }
+
+    .content {
+      max-width: 100% !important;
+      max-height: calc(100vh - 132px);
+    }
+
+    .two-columns,
+    .three-columns {
+      grid-template-columns: 1fr;
+      gap: 12px;
+    }
+
+    .slide-icon {
+      right: 24px;
+      top: 34px;
+      font-size: 44px;
+    }
+
+    .verse {
+      padding: 22px 24px 24px 28px;
+      margin: 20px 0;
+      border-left-width: 9px;
+      font-size: clamp(22px, 5.5vw, 34px);
+    }
+
+    .verse strong {
+      font-size: clamp(24px, 6vw, 38px);
+    }
+
+    .verse::before {
+      font-size: 34px;
+      right: 18px;
+    }
+
+    .controls {
+      left: 50% !important;
+      right: auto !important;
+      bottom: 12px !important;
+      transform: translateX(-50%) !important;
+    }
+
+    button {
+      padding: 9px 12px !important;
+      font-size: 13px !important;
+    }
+
+    .slide-counter {
+      padding: 9px 12px !important;
+      font-size: 13px !important;
+      min-width: 68px !important;
+    }
+
+    .footer {
+      left: 24px;
+      right: 24px;
+      bottom: 60px;
+      font-size: 12px;
+    }
+
+    .hint {
+      display: none;
+    }
+  }
+
+/* =====================================================
+   FIX SLIDE CÓ NHIỀU CÂU KINH THÁNH DÀI
+   Dùng cho slide 12, 13 hoặc các slide tương tự
+===================================================== */
+
+.compact-verse-slide .content {
+  max-height: calc(100vh - 135px);
+}
+
+.compact-verse-slide h2 {
+  font-size: clamp(30px, 3.8vw, 48px);
+  line-height: 1.08;
+}
+
+.compact-verse-slide .divider {
+  margin: 14px 0 18px;
+}
+
+.compact-verse-slide .verse {
+  padding: 18px 24px 20px 28px;
+  margin: 14px 0;
+  border-left-width: 9px;
+  font-size: clamp(21px, 2.05vw, 31px);
+  line-height: 1.28;
+}
+
+.compact-verse-slide .verse strong {
+  font-size: clamp(22px, 2.25vw, 34px);
+  margin-bottom: 8px;
+}
+
+.compact-verse-slide .verse::before {
+  font-size: 32px;
+  top: -13px;
+  right: 18px;
+}
+
+.compact-verse-slide p {
+  font-size: clamp(16px, 1.3vw, 20px);
+  line-height: 1.35;
+}
+
+.compact-verse-slide .main-box {
+  padding: 18px 22px;
+  margin: 16px 0;
+}
+
+.compact-verse-slide .main-box p {
+  font-size: clamp(16px, 1.3vw, 20px);
+  line-height: 1.35;
+  margin: 8px 0;
+}
+
+</style>
+</head>
+
+<body>
+  <div class="progress" id="progress"></div>
+  <div class="hint">Dùng phím ← → hoặc Space để chuyển slide | F11 để toàn màn hình</div>
+
+  <main class="presentation">
+
+    <section class="slide active title-slide">
+      <div class="content">
+        <h1>Bài 5: Đức Chúa Jesus Christ</h1>
+        <p class="subtitle">Giáo Lý Căn Bản — Thân vị và công tác của Chúa Jesus</p>
+        <div class="verse">
+          <p><strong>Câu gốc: Ga-la-ti 4:4-5</strong></p>
+          <p>
+            “Nhưng khi kỳ hạn đã được trọn, Đức Chúa Trời sai Con Ngài đến,
+            do một người nữ sinh ra, sinh ra dưới luật pháp, để chuộc những người ở dưới luật pháp,
+            hầu cho chúng ta được nhận làm con nuôi.”
+          </p>
+        </div>
+        <div class="slide-icon">✝️</div>
+      </div>
+      <div class="footer"><span>Bài 5 – Đức Chúa Jesus Christ</span><span>Slide 1 / 25</span></div>
+    </section>
+
+    <section class="slide">
+      <div class="slide-icon">📖</div>
+      <div class="content">
+        <h2>Câu Kinh Thánh chính</h2>
+        <div class="divider"></div>
+        <div class="verse">
+          <strong>Ga-la-ti 4:4-5</strong>
+          “Nhưng khi kỳ hạn đã được trọn, Đức Chúa Trời sai Con Ngài đến,
+          do một người nữ sinh ra, sinh ra dưới luật pháp, để chuộc những người ở dưới luật pháp,
+          hầu cho chúng ta được nhận làm con nuôi.”
+        </div>
+      </div>
+      <div class="footer"><span>Bài 5 – Đức Chúa Jesus Christ</span><span>Slide 2 / 25</span></div>
+    </section>
+
+    <section class="slide">
+      <div class="slide-icon">❓</div>
+      <div class="content">
+        <h2>Năm câu hỏi chính</h2>
+        <div class="divider"></div>
+        <ol class="number-list">
+          <li><span>Đức Chúa Jesus là ai?</span></li>
+          <li><span>Ngài có thật là Đức Chúa Trời không?</span></li>
+          <li><span>Vì sao Chúa Jesus phải là Đức Chúa Trời?</span></li>
+          <li><span>Ngài có thật là con người không?</span></li>
+          <li><span>Vì sao Ngài phải đến thế gian?</span></li>
+        </ol>
+        <div class="main-box">
+          <p>
+            Trọng tâm của bài học: <strong>Chúa Jesus là Đức Chúa Trời thật và con người thật;
+            Ngài đến để cứu tội nhân, chết thay, sống lại, và làm Đấng Cứu Rỗi duy nhất.</strong>
+          </p>
+        </div>
+      </div>
+      <div class="footer"><span>Bài 5 – Đức Chúa Jesus Christ</span><span>Slide 3 / 25</span></div>
+    </section>
+
+    <section class="slide">
+      <div class="slide-icon">🕊️</div>
+      <div class="content">
+        <h2>I. Đức Chúa Jesus là ai?</h2>
+        <div class="divider"></div>
+        <p>
+          Tên gọi và danh xưng của Chúa Jesus bày tỏ <strong>thân vị</strong>,
+          <strong>bản chất</strong>, <strong>sứ mạng</strong> và <strong>quyền cai trị</strong> của Ngài.
+        </p>
+        <div class="two-columns">
+          <div class="card">
+            <h3>Jesus / Giê-xu</h3>
+            <p><strong>YHWH là sự cứu rỗi</strong></p>
+            <p>Đức Giê-hô-va cứu.</p>
+            <p>Tên cá nhân, tên lịch sử của Ngài khi Ngài đến trong xác thịt.</p>
+          </div>
+          <div class="card">
+            <h3>Christ / Đấng Christ</h3>
+            <p><strong>Đấng được xức dầu</strong></p>
+            <p>Messiah / Mê-si-a.</p>
+            <p>Đấng được chọn để cứu: Vua, Thầy Tế Lễ, Tiên Tri.</p>
+          </div>
+        </div>
+      </div>
+      <div class="footer"><span>Bài 5 – Đức Chúa Jesus Christ</span><span>Slide 4 / 25</span></div>
+    </section>
+
+    <section class="slide">
+      <div class="slide-icon">👑</div>
+      <div class="content">
+        <h2>Jesus nghĩa là gì?</h2>
+        <div class="divider"></div>
+        <div class="verse">
+          <strong>Ma-thi-ơ 1:21</strong>
+          “Người sẽ sinh một trai, ngươi khá đặt tên là Jesus,
+          vì chính Con Trai ấy sẽ cứu dân mình ra khỏi tội.”
+        </div>
+        <ul>
+          <li>Tên <strong>Jesus</strong> không được đặt ngẫu nhiên.</li>
+          <li>Thiên sứ truyền cho Giô-sép đặt tên này.</li>
+          <li>Tên này bày tỏ sứ mạng: <strong>cứu dân Ngài ra khỏi tội</strong>.</li>
+          <li>Ngài không chỉ cứu khỏi hậu quả của tội, nhưng cứu khỏi chính quyền lực của tội.</li>
+        </ul>
+        <p><span class="main-point">Jesus = Đức Chúa Trời cứu.</span></p>
+      </div>
+      <div class="footer"><span>Bài 5 – Đức Chúa Jesus Christ</span><span>Slide 5 / 25</span></div>
+    </section>
+
+    <section class="slide">
+      <div class="slide-icon">🛢️</div>
+      <div class="content">
+        <h2>Christ nghĩa là gì?</h2>
+        <div class="divider"></div>
+        <p>
+          <strong>Christ</strong> không phải là họ của Chúa Jesus.
+          Đây là danh hiệu nói rằng Ngài là <strong>Đấng Mê-si-a</strong>,
+          Đấng được Đức Chúa Trời xức dầu và sai đến.
+        </p>
+        <div class="three-columns">
+          <div class="card">
+            <h3>Vua</h3>
+            <p>Ngài cai trị như Vua được Đức Chúa Trời lập.</p>
+          </div>
+          <div class="card">
+            <h3>Thầy Tế Lễ</h3>
+            <p>Ngài dâng chính mình làm sinh tế chuộc tội.</p>
+          </div>
+          <div class="card">
+            <h3>Tiên Tri</h3>
+            <p>Ngài bày tỏ Đức Chúa Trời cách trọn vẹn.</p>
+          </div>
+        </div>
+        <div class="main-box">
+          <p>
+            <strong>Jesus Christ</strong> nghĩa là:
+            Jesus người Na-xa-rét chính là Đấng Mê-si-a Đức Chúa Trời đã hứa.
+          </p>
+        </div>
+      </div>
+      <div class="footer"><span>Bài 5 – Đức Chúa Jesus Christ</span><span>Slide 6 / 25</span></div>
+    </section>
+
+    <section class="slide">
+      <div class="slide-icon">📜</div>
+      <div class="content">
+        <h2>Danh xưng của Chúa Jesus</h2>
+        <div class="divider"></div>
+        <div class="two-columns">
+          <div class="card">
+            <h3>Danh xưng chính</h3>
+            <ul>
+              <li>Con Đức Chúa Trời</li>
+              <li>Con Người</li>
+              <li>Đức Chúa Trời nhập thể</li>
+              <li>Đấng Mê-si-a của Y-sơ-ra-ên</li>
+              <li>Đấng Cứu Rỗi của thế gian</li>
+            </ul>
+          </div>
+          <div class="card">
+            <h3>Ý nghĩa</h3>
+            <ul>
+              <li>Ngài có cùng bản chất với Đức Chúa Trời.</li>
+              <li>Ngài thật sự làm người.</li>
+              <li>Ngài là Đấng được hứa trong Cựu Ước.</li>
+              <li>Ngài là Đấng duy nhất cứu tội nhân.</li>
+            </ul>
+          </div>
+        </div>
+        <p>
+          <span class="main-point">Ngài là Chúa trên mọi sự.</span>
+        </p>
+      </div>
+      <div class="footer"><span>Bài 5 – Đức Chúa Jesus Christ</span><span>Slide 7 / 25</span></div>
+    </section>
+
+    <section class="slide">
+      <div class="slide-icon">💎</div>
+      <div class="content">
+        <h2>Tóm tắt: Jesus là ai?</h2>
+        <div class="divider"></div>
+        <div class="main-box">
+          <p>
+            <strong>Jesus người Na-xa-rét</strong> chính là
+            <strong>Đấng Mê-si-a</strong> được Đức Chúa Trời hứa.
+          </p>
+          <p>
+            Ngài là Đấng được xức dầu để <strong>cứu tội nhân</strong>,
+            cai trị như <strong>Vua</strong>, dâng chính mình như
+            <strong>Thầy Tế Lễ</strong>, bày tỏ Đức Chúa Trời như
+            <strong>Tiên Tri</strong>, và làm <strong>Chúa trên mọi sự</strong>.
+          </p>
+        </div>
+      </div>
+      <div class="footer"><span>Bài 5 – Đức Chúa Jesus Christ</span><span>Slide 8 / 25</span></div>
+    </section>
+
+    <section class="slide">
+      <div class="slide-icon">🔥</div>
+      <div class="content">
+        <h2>II. Ngài có thật là Đức Chúa Trời không?</h2>
+        <div class="divider"></div>
+        <div class="verse">
+          <strong>Giăng 1:1-2</strong>
+          “Vào lúc ban đầu, hằng có Ngôi Lời. Ngôi Lời hằng có cùng Đức Chúa Trời.
+          Ngôi Lời hằng là Thiên Chúa. Vào lúc ban đầu, Đấng ấy hằng có cùng Đức Chúa Trời.”
+        </div>
+        <ul>
+          <li>Chúa Jesus hiện hữu từ ban đầu.</li>
+          <li>Ngài ở cùng Đức Chúa Trời: có sự phân biệt giữa Con và Cha.</li>
+          <li>Ngài là Thiên Chúa: có cùng bản chất Đức Chúa Trời.</li>
+        </ul>
+        <p><span class="main-point">Ngôi Lời chính là Chúa Jesus.</span></p>
+      </div>
+      <div class="footer"><span>Bài 5 – Đức Chúa Jesus Christ</span><span>Slide 9 / 25</span></div>
+    </section>
+
+    <section class="slide">
+      <div class="slide-icon">👨‍👦</div>
+      <div class="content">
+        <h2>Đức Chúa Cha xác nhận Con là Đức Chúa Trời</h2>
+        <div class="divider"></div>
+        <div class="verse">
+          <strong>Hê-bơ-rơ 1:6,8</strong>
+          “Tất cả các thiên sứ của Đức Chúa Trời phải thờ phượng Con.”<br><br>
+          “Nhưng nói về Con thì có lời phán:
+          ‘Lạy Đức Chúa Trời, ngôi Ngài trường tồn vĩnh cửu...’”
+        </div>
+        <ul>
+          <li>Các thiên sứ phải <strong>thờ phượng Con</strong>.</li>
+          <li>Đức Chúa Cha gọi Con là <strong>Đức Chúa Trời</strong>.</li>
+          <li>Ngôi của Con là <strong>đời đời</strong>.</li>
+        </ul>
+        <div class="main-box">
+          <p>
+            Đây là bằng chứng rất mạnh: không chỉ con người gọi Chúa Jesus là Đức Chúa Trời,
+            mà chính Đức Chúa Cha xác nhận điều đó.
+          </p>
+        </div>
+      </div>
+      <div class="footer"><span>Bài 5 – Đức Chúa Jesus Christ</span><span>Slide 10 / 25</span></div>
+    </section>
+
+    <section class="slide">
+      <div class="slide-icon">🌌</div>
+      <div class="content">
+        <h2>Con là Đấng sáng tạo và hằng hữu</h2>
+        <div class="divider"></div>
+        <div class="verse">
+          <strong>Hê-bơ-rơ 1:10-12</strong>
+          “Ban đầu Chúa lập nền trái đất và các tầng trời cũng do tay Chúa dựng nên...
+          Trời đất sẽ tiêu tan nhưng Chúa hằng còn...
+          Chúa vẫn là Chúa Hằng Hữu, năm tháng Chúa vẫn đời đời bất tận.”
+        </div>
+        <ul>
+          <li>Con tham dự trong công cuộc sáng tạo.</li>
+          <li>Trời đất có thể thay đổi, nhưng Ngài không thay đổi.</li>
+          <li>Ngài là Đấng hằng hữu.</li>
+        </ul>
+      </div>
+      <div class="footer"><span>Bài 5 – Đức Chúa Jesus Christ</span><span>Slide 11 / 25</span></div>
+    </section>
+
+    <section class="slide compact-verse-slide">
+      <div class="slide-icon">🗣️</div>
+      <div class="content">
+        <h2>Chính Chúa Jesus tuyên bố Ngài là Đức Chúa Trời</h2>
+        <div class="divider"></div>
+        <div class="verse">
+          <strong>Giăng 8:23-24</strong>
+          “Các ngươi ra từ dưới, còn Ta đến từ trên...
+          Vì nếu các ngươi không tin Ta là Đấng Hằng Hữu
+          thì các ngươi sẽ chết trong tội lỗi mình.”
+        </div>
+        <div class="verse">
+          <strong>Giăng 8:58</strong>
+          “Thật, Ta bảo thật các ngươi, trước khi Áp-ra-ham hiện hữu, Ta hằng hữu.”
+        </div>
+        <p>
+          Chúa Jesus dùng cụm từ <strong>“Ta là”</strong> /
+          <strong>“Ta là Đấng Hằng Hữu”</strong> để bày tỏ thần tính của Ngài.
+        </p>
+      </div>
+      <div class="footer"><span>Bài 5 – Đức Chúa Jesus Christ</span><span>Slide 12 / 25</span></div>
+    </section>
+
+    <section class="slide compact-verse-slide">
+      <div class="slide-icon">⛰️</div>
+      <div class="content">
+        <h2>“Ta Là” và danh Đức Chúa Trời</h2>
+        <div class="divider"></div>
+        <div class="verse">
+          <strong>Xuất Ai Cập 3:14</strong>
+          “Đức Chúa Trời đáp cùng Môi-se:
+          ‘Ta là Đấng Tự Hữu Hằng Hữu, Đấng Tự Hữu đã sai con.’”
+        </div>
+        <div class="verse">
+          <strong>Giăng 13:19</strong>
+          “Bây giờ, Ta nói điều nầy với các con trước khi việc xảy ra,
+          để khi việc xảy ra thì các con tin rằng Ta là Đấng Hằng Hữu.”
+        </div>
+        <div class="main-box">
+          <p>
+            Người Do Thái hiểu đây là danh thánh của Đức Chúa Trời.
+            Vì vậy, khi Chúa Jesus dùng cách nói “Ta là”, họ hiểu rằng Ngài đang tự xưng
+            là Đức Chúa Trời.
+          </p>
+        </div>
+      </div>
+      <div class="footer"><span>Bài 5 – Đức Chúa Jesus Christ</span><span>Slide 13 / 25</span></div>
+    </section>
+
+    <section class="slide">
+      <div class="slide-icon">🙌</div>
+      <div class="content">
+        <h2>Thô-ma xưng nhận Chúa Jesus là Đức Chúa Trời</h2>
+        <div class="divider"></div>
+        <div class="verse">
+          <strong>Giăng 20:28</strong>
+          Thô-ma thưa với Ngài:
+          “Lạy Chúa tôi và Đức Chúa Trời tôi!”
+        </div>
+        <ul>
+          <li>Thô-ma không chỉ gọi Ngài là Thầy.</li>
+          <li>Ông xưng nhận Ngài là <strong>Chúa</strong> và <strong>Đức Chúa Trời</strong>.</li>
+          <li>Chúa Jesus không quở trách ông.</li>
+          <li>Điều đó cho thấy lời xưng nhận này là đúng.</li>
+        </ul>
+      </div>
+      <div class="footer"><span>Bài 5 – Đức Chúa Jesus Christ</span><span>Slide 14 / 25</span></div>
+    </section>
+
+    <section class="slide">
+      <div class="slide-icon">✍️</div>
+      <div class="content">
+        <h2>Phao-lô xác nhận Chúa Jesus là Đức Chúa Trời</h2>
+        <div class="divider"></div>
+        <div class="verse">
+          <strong>Rô-ma 9:5</strong>
+          “...là dân được sinh ra bởi các tổ phụ và từ dòng dõi nầy,
+          về phần xác, đã sinh ra Đấng Christ,
+          Đấng trên hết mọi sự, là Đức Chúa Trời đáng được chúc tụng đời đời. A-men.”
+        </div>
+        <ul>
+          <li>Đấng Christ ra từ dân Y-sơ-ra-ên về phần xác.</li>
+          <li>Ngài là Đấng trên hết mọi sự.</li>
+          <li>Ngài là Đức Chúa Trời đáng được chúc tụng đời đời.</li>
+        </ul>
+      </div>
+      <div class="footer"><span>Bài 5 – Đức Chúa Jesus Christ</span><span>Slide 15 / 25</span></div>
+    </section>
+
+    <section class="slide">
+      <div class="slide-icon">🧱</div>
+      <div class="content">
+        <h2>III. Vì sao Chúa Jesus phải là Đức Chúa Trời?</h2>
+        <div class="divider"></div>
+        <div class="main-box">
+          <p>
+            Nếu Chúa Jesus không phải là Đức Chúa Trời,
+            Ngài không thể cứu loài người.
+          </p>
+        </div>
+        <ul>
+          <li>Chỉ Đức Chúa Trời là vô tội tuyệt đối.</li>
+          <li>Chỉ Đấng vô tội mới có thể chết thay cho người có tội.</li>
+          <li>Một người có tội không thể cứu người có tội khác.</li>
+          <li>Chỉ sự sống của Đức Chúa Trời mới có giá trị đủ lớn để chuộc tội cho cả nhân loại.</li>
+        </ul>
+        <p><span class="main-point">Thần tính của Chúa Jesus là nền tảng của sự cứu rỗi.</span></p>
+      </div>
+      <div class="footer"><span>Bài 5 – Đức Chúa Jesus Christ</span><span>Slide 16 / 25</span></div>
+    </section>
+
+    <section class="slide compact-verse-slide">
+      <div class="slide-icon">🧍</div>
+      <div class="content">
+        <h2>IV. Ngài có thật là con người không?</h2>
+        <div class="divider"></div>
+        <div class="verse">
+          <strong>Giăng 1:14</strong>
+          “Ngôi Lời đã trở nên con người, cư ngụ giữa chúng ta.”
+        </div>
+        <div class="verse">
+          <strong>Ga-la-ti 4:4</strong>
+          “Đức Chúa Trời sai Con Ngài đến, do một người nữ sinh ra.”
+        </div>
+        <ul>
+          <li>Ngôi Lời thật sự trở nên con người.</li>
+          <li>Chúa Jesus được sinh bởi người nữ.</li>
+          <li>Ngài không giả vờ làm người.</li>
+          <li>Ngài bước vào lịch sử thật của nhân loại.</li>
+        </ul>
+      </div>
+      <div class="footer"><span>Bài 5 – Đức Chúa Jesus Christ</span><span>Slide 17 / 25</span></div>
+    </section>
+
+    <section class="slide compact-verse-slide">
+      <div class="slide-icon">👶</div>
+      <div class="content">
+        <h2>Sự giáng sinh bởi Đức Thánh Linh</h2>
+        <div class="divider"></div>
+        <div class="verse">
+          <strong>Lu-ca 1:34-35</strong>
+          Ma-ri thưa với thiên sứ:
+          “Tôi chưa ăn ở với người nam nào thì làm sao có được điều đó?”<br><br>
+          Thiên sứ đáp:
+          “Đức Thánh Linh sẽ ngự trên cô, và quyền năng của Đấng Chí Cao sẽ phủ che cô;
+          cho nên con thánh sinh ra sẽ được gọi là Con Đức Chúa Trời.”
+        </div>
+        <ul>
+          <li>Chúa Jesus được sinh ra bởi Ma-ri.</li>
+          <li>Sự giáng sinh của Ngài là bởi quyền năng Đức Thánh Linh.</li>
+          <li>Ngài là con thánh, được gọi là Con Đức Chúa Trời.</li>
+        </ul>
+      </div>
+      <div class="footer"><span>Bài 5 – Đức Chúa Jesus Christ</span><span>Slide 18 / 25</span></div>
+    </section>
+
+    <section class="slide">
+      <div class="slide-icon">💧</div>
+      <div class="content">
+        <h2>Bằng chứng Ngài là người thật</h2>
+        <div class="divider"></div>
+        <div class="two-columns">
+          <div class="card">
+            <h3>Ngài kinh nghiệm đời sống con người</h3>
+            <ul>
+              <li>Biết đói.</li>
+              <li>Biết mệt.</li>
+              <li>Biết đau buồn.</li>
+              <li>Biết chịu đau đớn.</li>
+              <li>Chịu chết thật.</li>
+            </ul>
+          </div>
+          <div class="card">
+            <h3>Kinh Thánh</h3>
+            <ul>
+              <li><strong>Ma-thi-ơ 4:2</strong> — Ngài đói.</li>
+              <li><strong>Giăng 4:6</strong> — Ngài mệt mỏi.</li>
+              <li><strong>Giăng 11:35</strong> — Đức Chúa Jesus khóc.</li>
+              <li><strong>Giăng 19:30</strong> — Ngài trút linh hồn.</li>
+            </ul>
+          </div>
+        </div>
+        <p><span class="main-point">Ngài là người thật 100%, không phải chỉ “giả vờ” làm người.</span></p>
+      </div>
+      <div class="footer"><span>Bài 5 – Đức Chúa Jesus Christ</span><span>Slide 19 / 25</span></div>
+    </section>
+
+    <section class="slide">
+      <div class="slide-icon">⚖️</div>
+      <div class="content">
+        <h2>Đức Chúa Trời thật và con người thật</h2>
+        <div class="divider"></div>
+        <p>
+          Khi Ngài mặc lấy thân xác con người, Ngài không đánh mất thần tính.
+          Nhưng Ngài tự giới hạn chính mình trong thân xác con người.
+        </p>
+        <div class="main-box">
+          <p>
+            <strong>Ví dụ:</strong> Một vận động viên chạy rất nhanh nhưng mặc thêm một bộ đồ nặng.
+            Khả năng của người ấy không mất đi, nhưng bị giới hạn bởi bộ đồ.
+          </p>
+          <p>
+            Cũng vậy, Chúa Jesus vẫn là Đức Chúa Trời,
+            nhưng khi mặc lấy thân xác con người, Ngài chấp nhận những giới hạn của nhân tính.
+          </p>
+        </div>
+        <p><span class="main-point">Chúa Jesus vừa là Đức Chúa Trời thật, vừa là con người thật.</span></p>
+      </div>
+      <div class="footer"><span>Bài 5 – Đức Chúa Jesus Christ</span><span>Slide 20 / 25</span></div>
+    </section>
+
+    <section class="slide compact-verse-slide">
+      <div class="slide-icon">🌍</div>
+      <div class="content">
+        <h2>V. Vì sao Ngài phải đến thế gian?</h2>
+        <div class="divider"></div>
+        <div class="verse">
+          <strong>Rô-ma 3:23</strong>
+          “Vì mọi người đều đã phạm tội.”
+        </div>
+        <div class="verse">
+          <strong>Rô-ma 6:23</strong>
+          “Vì tiền công của tội lỗi là sự chết.”
+        </div>
+        <ul>
+          <li>Con người phạm tội.</li>
+          <li>Tội lỗi đem đến sự chết.</li>
+          <li>Con người không thể tự cứu mình.</li>
+          <li>Con người cần một Đấng Cứu Rỗi.</li>
+        </ul>
+      </div>
+      <div class="footer"><span>Bài 5 – Đức Chúa Jesus Christ</span><span>Slide 21 / 25</span></div>
+    </section>
+
+    <section class="slide">
+      <div class="slide-icon">📄</div>
+      <div class="content">
+        <h2>Chúa Jesus là đại diện hợp pháp của người tin</h2>
+        <div class="divider"></div>
+        <p>
+          Vì con người phạm tội, nên phải có một con người đại diện để chịu án phạt.
+        </p>
+        <ul>
+          <li>Nếu Chúa Jesus không trở thành người, Ngài không thể chết.</li>
+          <li>Ngài không thể đổ huyết.</li>
+          <li>Ngài không thể làm đại diện hợp pháp cho nhân loại.</li>
+          <li>Ngài không thể thay thế con người trong án phạt tội lỗi.</li>
+        </ul>
+        <div class="main-box">
+          <p>
+            <strong>Ví dụ:</strong> Muốn người khác thay mặt mình giải quyết việc pháp lý,
+            cần có giấy ủy quyền hoặc sự công nhận hợp pháp.
+          </p>
+          <p>
+            Tương tự, người tin công nhận Chúa Jesus là Đấng đại diện cho mình
+            trước mặt Đức Chúa Trời trong vấn đề tội lỗi.
+          </p>
+        </div>
+      </div>
+      <div class="footer"><span>Bài 5 – Đức Chúa Jesus Christ</span><span>Slide 22 / 25</span></div>
+    </section>
+
+    <section class="slide">
+      <div class="slide-icon">🙏</div>
+      <div class="content">
+        <h2>Ý nghĩa của “cầu nguyện tiếp nhận Chúa”</h2>
+        <div class="divider"></div>
+        <div class="main-box">
+          <p>
+            “Con công nhận Đức Chúa Jesus là Đấng đại diện hợp pháp của con,
+            là Đấng chịu án phạt thay cho con,
+            là Đấng giải quyết vấn đề tội lỗi của con trước mặt Đức Chúa Trời.”
+          </p>
+        </div>
+        <ul>
+          <li>Tin Chúa không chỉ là tin Ngài có thật.</li>
+          <li>Tin Chúa là đồng ý để Ngài đại diện mình trước Đức Chúa Trời.</li>
+          <li>Tin Chúa là tiếp nhận công tác cứu chuộc của Ngài.</li>
+          <li>Tin Chúa là đầu phục Ngài là Chúa và Cứu Chúa.</li>
+        </ul>
+      </div>
+      <div class="footer"><span>Bài 5 – Đức Chúa Jesus Christ</span><span>Slide 23 / 25</span></div>
+    </section>
+
+    <section class="slide compact-verse-slide">
+      <div class="slide-icon">❤️</div>
+      <div class="content">
+        <h2>Vì Đức Chúa Trời yêu thương và vì con người không thể tự cứu</h2>
+        <div class="divider"></div>
+        <div class="verse">
+          <strong>Giăng 3:16</strong>
+          “Vì Đức Chúa Trời yêu thương thế gian,
+          đến nỗi đã ban Con Một của Ngài...”
+        </div>
+        <div class="verse">
+          <strong>Lu-ca 19:10</strong>
+          “Vì Con Người đã đến để tìm và cứu kẻ bị mất.”
+        </div>
+        <div class="main-box">
+          <p>
+            Con người có thể làm việc tốt trước mặt xã hội,
+            nhưng không thể xóa tội trước mặt Đức Chúa Trời thánh khiết.
+          </p>
+          <p>
+            Chúa Jesus đến không phải vì con người xứng đáng,
+            nhưng vì Đức Chúa Trời yêu thương.
+          </p>
+        </div>
+      </div>
+      <div class="footer"><span>Bài 5 – Đức Chúa Jesus Christ</span><span>Slide 24 / 25</span></div>
+    </section>
+
+    <section class="slide compact-verse-slide">
+      <div class="slide-icon">🌅</div>
+      <div class="content">
+        <h2>Kết luận: Sự cứu rỗi chỉ có trong Chúa Jesus</h2>
+        <div class="divider"></div>
+        <div class="verse">
+          <strong>Công vụ 4:12</strong>
+          “Chẳng có sự cứu rỗi trong đấng nào khác,
+          vì ở dưới trời chẳng có danh nào khác ban cho loài người
+          để chúng ta phải nhờ đó mà được cứu.”
+        </div>
+        <div class="two-columns">
+          <div class="card">
+            <h3>Chúa Jesus là ai?</h3>
+            <ul>
+              <li>Đức Chúa Trời thật.</li>
+              <li>Con người thật.</li>
+              <li>Đấng Mê-si-a.</li>
+              <li>Đấng Cứu Rỗi duy nhất.</li>
+            </ul>
+          </div>
+          <div class="card">
+            <h3>Đáp ứng của chúng ta</h3>
+            <ul>
+              <li>Nhận biết tội lỗi.</li>
+              <li>Ăn năn.</li>
+              <li>Tin nhận Chúa Jesus.</li>
+              <li>Đầu phục Ngài là Chúa.</li>
+            </ul>
+          </div>
+        </div>
+        <p><span class="main-point">Ngài đến để cứu — và chúng ta cần tin nhận Ngài.</span></p>
+      </div>
+      <div class="footer"><span>Bài 5 – Đức Chúa Jesus Christ</span><span>Slide 25 / 25</span></div>
+    </section>
+
+  </main>
+
+  <div class="controls">
+    <button onclick="prevSlide()">◀ Trước</button>
+    <div class="slide-counter" id="counter">1 / 25</div>
+    <button onclick="nextSlide()">Sau ▶</button>
+  </div>
+
+  <script>
+    const slides = Array.from(document.querySelectorAll(".slide"));
+    const counter = document.getElementById("counter");
+    const progress = document.getElementById("progress");
+    let currentSlide = 0;
+
+    function updateSlide() {
+      slides.forEach((slide, index) => {
+        slide.classList.toggle("active", index === currentSlide);
+      });
+
+      counter.textContent = `${currentSlide + 1} / ${slides.length}`;
+      progress.style.width = `${((currentSlide + 1) / slides.length) * 100}%`;
+
+      document.querySelectorAll(".footer").forEach((footer, index) => {
+        const spans = footer.querySelectorAll("span");
+        if (spans[1]) {
+          spans[1].textContent = `Slide ${index + 1} / ${slides.length}`;
+        }
+      });
+    }
+
+    function nextSlide() {
+      if (currentSlide < slides.length - 1) {
+        currentSlide++;
+        updateSlide();
+      }
+    }
+
+    function prevSlide() {
+      if (currentSlide > 0) {
+        currentSlide--;
+        updateSlide();
+      }
+    }
+
+    document.addEventListener("keydown", function(event) {
+      if (
+        event.key === "ArrowRight" ||
+        event.key === " " ||
+        event.key === "PageDown"
+      ) {
+        event.preventDefault();
+        nextSlide();
+      }
+
+      if (
+        event.key === "ArrowLeft" ||
+        event.key === "PageUp"
+      ) {
+        event.preventDefault();
+        prevSlide();
+      }
+
+      if (event.key === "Home") {
+        currentSlide = 0;
+        updateSlide();
+      }
+
+      if (event.key === "End") {
+        currentSlide = slides.length - 1;
+        updateSlide();
+      }
+    });
+
+    updateSlide();
+  </script>
+</body>
+</html>
