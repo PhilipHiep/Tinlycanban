@@ -21,30 +21,17 @@
     color: #f8fafc;
   }
 
-  /* Chỉ cho phép các thành phần chính hiển thị */
-  body > *:not(.progress):not(.hint):not(.presentation):not(.controls):not(script):not(style) {
-    display: none !important;
-  }
-
-  /* Nếu có iframe/object/embed lạ bị chèn vào thì ẩn */
-  body > iframe,
-  body > object,
-  body > embed {
-    display: none !important;
-  }
-
   .presentation {
-    position: fixed !important;
-    inset: 0 !important;
-    width: 100vw !important;
-    height: 100vh !important;
-    position: relative !important;
-    overflow: hidden !important;
-    background:
-      radial-gradient(circle at top left, rgba(59, 130, 246, 0.22), transparent 36%),
-      radial-gradient(circle at bottom right, rgba(245, 158, 11, 0.16), transparent 34%),
-      #020617 !important;
-    z-index: 1 !important;
+  position: fixed !important;
+  inset: 0 !important;
+  width: 100vw !important;
+  height: 100vh !important;
+  overflow: hidden !important;
+  background:
+    radial-gradient(circle at top left, rgba(59, 130, 246, 0.22), transparent 36%),
+    radial-gradient(circle at bottom right, rgba(245, 158, 11, 0.16), transparent 34%),
+    #020617 !important;
+  z-index: 2147483000 !important;
   }
 
   .slide {
@@ -59,7 +46,6 @@
     align-items: center;
     justify-content: center;
     padding: 58px 72px 92px;
-    z-index: 2 !important;
   }
 
   .slide.active {
@@ -381,7 +367,7 @@
     height: 5px;
     background: linear-gradient(90deg, #f59e0b, #3b82f6, #22c55e);
     width: 0%;
-    z-index: 9999 !important;
+    z-index: 2147483647 !important;
     transition: width 0.2s ease;
   }
 
@@ -390,7 +376,7 @@
     top: 16px;
     left: 50%;
     transform: translateX(-50%);
-    z-index: 9999 !important;
+    z-index: 2147483647 !important;
     color: #cbd5e1;
     background: rgba(15, 23, 42, 0.72);
     border: 1px solid rgba(148, 163, 184, 0.25);
@@ -404,16 +390,17 @@
   }
 
   .controls {
-    position: fixed !important;
-    left: 50% !important;
-    right: auto !important;
-    bottom: 18px !important;
-    transform: translateX(-50%) !important;
-    z-index: 9999 !important;
-    display: flex !important;
-    gap: 10px !important;
-    align-items: center !important;
-    justify-content: center !important;
+  position: fixed !important;
+  left: 50% !important;
+  right: auto !important;
+  top: auto !important;
+  bottom: 18px !important;
+  transform: translateX(-50%) !important;
+  z-index: 2147483647 !important;
+  display: flex !important;
+  gap: 10px !important;
+  align-items: center !important;
+  justify-content: center !important;
   }
 
   .controls button,
@@ -591,6 +578,50 @@
   font-size: clamp(16px, 1.3vw, 20px);
   line-height: 1.35;
   margin: 8px 0;
+}
+
+/* =====================================================
+   FIX KHỐI TRẮNG ĐÈ GIỮA MÀN HÌNH TRÊN GITHUB PAGES
+===================================================== */
+
+/* Ép slide phủ toàn bộ trang, nằm trên mọi overlay thường */
+.presentation,
+.slide.active {
+  background-color: #020617 !important;
+}
+
+/* Ẩn iframe/object/embed lạ nếu bị chèn vào body */
+body > iframe,
+body > object,
+body > embed {
+  display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+}
+
+/* Chỉ giữ lại các phần tử chính cấp body */
+body > *:not(.progress):not(.hint):not(.presentation):not(.controls):not(script):not(style) {
+  display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+}
+
+/* Đảm bảo slide và nội dung luôn ở trên nền */
+.slide {
+  z-index: 2147483001 !important;
+}
+
+.slide.active .content {
+  position: relative !important;
+  z-index: 2147483002 !important;
+}
+
+/* Đảm bảo nút điều khiển luôn nằm dưới màn hình, không bị kéo lên giữa */
+.controls {
+  top: auto !important;
+  bottom: 18px !important;
 }
 
 </style>
@@ -1219,6 +1250,36 @@
     const counter = document.getElementById("counter");
     const progress = document.getElementById("progress");
     let currentSlide = 0;
+
+    function removeStrangeOverlays() {
+    const allowedClasses = ["progress", "hint", "presentation", "controls"];
+
+      Array.from(document.body.children).forEach((el) => {
+        const tag = el.tagName.toLowerCase();
+
+        if (tag === "script" || tag === "style") return;
+
+        const isAllowed = allowedClasses.some((className) =>
+          el.classList.contains(className)
+        );
+
+        if (!isAllowed) {
+          el.remove();
+        }
+      });
+
+      document.querySelectorAll("iframe, object, embed").forEach((el) => {
+        el.remove();
+      });
+    }
+
+    removeStrangeOverlays();
+
+    window.addEventListener("load", removeStrangeOverlays);
+    setTimeout(removeStrangeOverlays, 300);
+    setTimeout(removeStrangeOverlays, 1000);
+
+    const slides = Array.from(document.querySelectorAll(".slide"));
 
     function updateSlide() {
       slides.forEach((slide, index) => {
