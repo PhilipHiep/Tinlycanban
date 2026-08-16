@@ -21,7 +21,21 @@
     color: #f8fafc;
   }
 
+  /* Chỉ cho phép các thành phần chính hiển thị */
+  body > *:not(.progress):not(.hint):not(.presentation):not(.controls):not(script):not(style) {
+    display: none !important;
+  }
+
+  /* Nếu có iframe/object/embed lạ bị chèn vào thì ẩn */
+  body > iframe,
+  body > object,
+  body > embed {
+    display: none !important;
+  }
+
   .presentation {
+    position: fixed !important;
+    inset: 0 !important;
     width: 100vw !important;
     height: 100vh !important;
     position: relative !important;
@@ -30,6 +44,7 @@
       radial-gradient(circle at top left, rgba(59, 130, 246, 0.22), transparent 36%),
       radial-gradient(circle at bottom right, rgba(245, 158, 11, 0.16), transparent 34%),
       #020617 !important;
+    z-index: 1 !important;
   }
 
   .slide {
@@ -44,6 +59,7 @@
     align-items: center;
     justify-content: center;
     padding: 58px 72px 92px;
+    z-index: 2 !important;
   }
 
   .slide.active {
@@ -365,7 +381,7 @@
     height: 5px;
     background: linear-gradient(90deg, #f59e0b, #3b82f6, #22c55e);
     width: 0%;
-    z-index: 9999;
+    z-index: 9999 !important;
     transition: width 0.2s ease;
   }
 
@@ -374,7 +390,7 @@
     top: 16px;
     left: 50%;
     transform: translateX(-50%);
-    z-index: 9999;
+    z-index: 9999 !important;
     color: #cbd5e1;
     background: rgba(15, 23, 42, 0.72);
     border: 1px solid rgba(148, 163, 184, 0.25);
