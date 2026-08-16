@@ -401,6 +401,12 @@
   gap: 10px !important;
   align-items: center !important;
   justify-content: center !important;
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  pointer-events: auto !important;
   }
 
   .controls button,
@@ -409,30 +415,39 @@
   }
 
   button {
-    border: 1px solid rgba(148, 163, 184, 0.35);
-    background: rgba(30, 41, 59, 0.9);
-    color: #fff;
-    border-radius: 999px;
-    padding: 10px 16px;
-    cursor: pointer;
-    font-weight: 700;
-    font-size: 14px;
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.28);
+  appearance: none !important;
+  -webkit-appearance: none !important;
+  border: 1px solid rgba(148, 163, 184, 0.45) !important;
+  background: rgba(30, 41, 59, 0.96) !important;
+  color: #fff !important;
+  border-radius: 999px !important;
+  padding: 10px 16px !important;
+  cursor: pointer !important;
+  font-weight: 700 !important;
+  font-size: 14px !important;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.36) !important;
+  pointer-events: auto !important;
   }
 
   button:hover {
-    background: rgba(37, 99, 235, 0.95);
+    background: rgba(37, 99, 235, 0.98) !important;
+  }
+
+  button:disabled {
+    opacity: 0.45 !important;
+    cursor: not-allowed !important;
   }
 
   .slide-counter {
-    padding: 10px 16px;
-    border-radius: 999px;
-    background: rgba(15, 23, 42, 0.88);
-    color: #e2e8f0;
-    border: 1px solid rgba(148, 163, 184, 0.35);
-    font-weight: 700;
-    min-width: 76px;
-    text-align: center;
+    padding: 10px 16px !important;
+    border-radius: 999px !important;
+    background: rgba(15, 23, 42, 0.96) !important;
+    color: #e2e8f0 !important;
+    border: 1px solid rgba(148, 163, 184, 0.45) !important;
+    font-weight: 700 !important;
+    min-width: 76px !important;
+    text-align: center !important;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.36) !important;
   }
 
   .small {
@@ -622,6 +637,33 @@ body > *:not(.progress):not(.hint):not(.presentation):not(.controls):not(script)
 .controls {
   top: auto !important;
   bottom: 18px !important;
+}
+
+/* Xóa nền trắng phía sau cụm nút điều khiển */
+#controls,
+.controls,
+.controls * {
+  box-sizing: border-box !important;
+}
+
+#controls {
+  background-color: transparent !important;
+  background: transparent !important;
+  border: 0 !important;
+  outline: 0 !important;
+}
+
+.controls::before,
+.controls::after {
+  content: none !important;
+  display: none !important;
+}
+
+/* Nếu trình duyệt tự thêm nền trắng khi focus */
+button:focus,
+button:active {
+  outline: none !important;
+  background: rgba(37, 99, 235, 0.98) !important;
 }
 
 </style>
@@ -1239,108 +1281,109 @@ body > *:not(.progress):not(.hint):not(.presentation):not(.controls):not(script)
 
   </main>
 
-  <div class="controls">
-    <button onclick="prevSlide()">◀ Trước</button>
-    <div class="slide-counter" id="counter">1 / 25</div>
-    <button onclick="nextSlide()">Sau ▶</button>
+  <div class="controls" id="controls">
+  <button type="button" id="prevBtn">◀ Trước</button>
+  <div class="slide-counter" id="counter">1 / 25</div>
+  <button type="button" id="nextBtn">Sau ▶</button>
   </div>
 
   <script>
-    const slides = Array.from(document.querySelectorAll(".slide"));
-    const counter = document.getElementById("counter");
-    const progress = document.getElementById("progress");
-    let currentSlide = 0;
+  const slides = Array.from(document.querySelectorAll(".slide"));
+  const counter = document.getElementById("counter");
+  const progress = document.getElementById("progress");
+  const prevBtn = document.getElementById("prevBtn");
+  const nextBtn = document.getElementById("nextBtn");
 
-    function removeStrangeOverlays() {
-    const allowedClasses = ["progress", "hint", "presentation", "controls"];
+  let currentSlide = 0;
 
-      Array.from(document.body.children).forEach((el) => {
-        const tag = el.tagName.toLowerCase();
+  function updateSlide() {
+    slides.forEach((slide, index) => {
+      slide.classList.toggle("active", index === currentSlide);
+    });
 
-        if (tag === "script" || tag === "style") return;
+    counter.textContent = `${currentSlide + 1} / ${slides.length}`;
 
-        const isAllowed = allowedClasses.some((className) =>
-          el.classList.contains(className)
-        );
-
-        if (!isAllowed) {
-          el.remove();
-        }
-      });
-
-      document.querySelectorAll("iframe, object, embed").forEach((el) => {
-        el.remove();
-      });
-    }
-
-    removeStrangeOverlays();
-
-    window.addEventListener("load", removeStrangeOverlays);
-    setTimeout(removeStrangeOverlays, 300);
-    setTimeout(removeStrangeOverlays, 1000);
-
-    const slides = Array.from(document.querySelectorAll(".slide"));
-
-    function updateSlide() {
-      slides.forEach((slide, index) => {
-        slide.classList.toggle("active", index === currentSlide);
-      });
-
-      counter.textContent = `${currentSlide + 1} / ${slides.length}`;
+    if (progress) {
       progress.style.width = `${((currentSlide + 1) / slides.length) * 100}%`;
-
-      document.querySelectorAll(".footer").forEach((footer, index) => {
-        const spans = footer.querySelectorAll("span");
-        if (spans[1]) {
-          spans[1].textContent = `Slide ${index + 1} / ${slides.length}`;
-        }
-      });
     }
 
-    function nextSlide() {
-      if (currentSlide < slides.length - 1) {
-        currentSlide++;
-        updateSlide();
-      }
-    }
-
-    function prevSlide() {
-      if (currentSlide > 0) {
-        currentSlide--;
-        updateSlide();
-      }
-    }
-
-    document.addEventListener("keydown", function(event) {
-      if (
-        event.key === "ArrowRight" ||
-        event.key === " " ||
-        event.key === "PageDown"
-      ) {
-        event.preventDefault();
-        nextSlide();
-      }
-
-      if (
-        event.key === "ArrowLeft" ||
-        event.key === "PageUp"
-      ) {
-        event.preventDefault();
-        prevSlide();
-      }
-
-      if (event.key === "Home") {
-        currentSlide = 0;
-        updateSlide();
-      }
-
-      if (event.key === "End") {
-        currentSlide = slides.length - 1;
-        updateSlide();
+    document.querySelectorAll(".footer").forEach((footer, index) => {
+      const spans = footer.querySelectorAll("span");
+      if (spans[1]) {
+        spans[1].textContent = `Slide ${index + 1} / ${slides.length}`;
       }
     });
 
-    updateSlide();
+    if (prevBtn) {
+      prevBtn.disabled = currentSlide === 0;
+    }
+
+    if (nextBtn) {
+      nextBtn.disabled = currentSlide === slides.length - 1;
+    }
+  }
+
+  function nextSlide() {
+    if (currentSlide < slides.length - 1) {
+      currentSlide++;
+      updateSlide();
+    }
+  }
+
+  function prevSlide() {
+    if (currentSlide > 0) {
+      currentSlide--;
+      updateSlide();
+    }
+  }
+
+  if (prevBtn) {
+    prevBtn.addEventListener("click", function(event) {
+      event.preventDefault();
+      prevSlide();
+    });
+  }
+
+  if (nextBtn) {
+    nextBtn.addEventListener("click", function(event) {
+      event.preventDefault();
+      nextSlide();
+    });
+  }
+
+  document.addEventListener("keydown", function(event) {
+    if (
+      event.key === "ArrowRight" ||
+      event.key === " " ||
+      event.key === "PageDown"
+    ) {
+      event.preventDefault();
+      nextSlide();
+    }
+
+    if (
+      event.key === "ArrowLeft" ||
+      event.key === "PageUp"
+    ) {
+      event.preventDefault();
+      prevSlide();
+    }
+
+    if (event.key === "Home") {
+      currentSlide = 0;
+      updateSlide();
+    }
+
+    if (event.key === "End") {
+      currentSlide = slides.length - 1;
+      updateSlide();
+    }
+  });
+
+  window.nextSlide = nextSlide;
+  window.prevSlide = prevSlide;
+
+  updateSlide();
   </script>
 </body>
 </html>
