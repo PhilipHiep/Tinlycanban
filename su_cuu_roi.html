@@ -1,0 +1,1361 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Bài 6 - Sự Cứu Rỗi | Slide HTML</title>
+
+  <style>
+  * {
+    box-sizing: border-box;
+  }
+
+  html,
+  body {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    background: #020617 !important;
+    overflow: hidden !important;
+    font-family: "Segoe UI", Arial, sans-serif;
+    color: #f8fafc;
+  }
+
+  .presentation {
+    position: fixed !important;
+    inset: 0 !important;
+    width: 100vw !important;
+    height: 100vh !important;
+    overflow: hidden !important;
+    background:
+      radial-gradient(circle at top left, rgba(59, 130, 246, 0.22), transparent 36%),
+      radial-gradient(circle at bottom right, rgba(245, 158, 11, 0.16), transparent 34%),
+      #020617 !important;
+    z-index: 2147483000 !important;
+  }
+
+  .slide {
+    width: 100vw !important;
+    height: 100vh !important;
+    min-width: 100vw !important;
+    min-height: 100vh !important;
+    position: absolute !important;
+    inset: 0 !important;
+    overflow: hidden !important;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 58px 72px 92px;
+  }
+
+  .slide.active {
+    display: flex !important;
+    animation: fadeIn 0.35s ease-in-out;
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .content {
+    width: 100%;
+    max-width: 1180px;
+    max-height: calc(100vh - 145px);
+    overflow: hidden;
+  }
+
+  .title-slide {
+    text-align: center;
+  }
+
+  h1 {
+    font-size: clamp(42px, 6vw, 78px);
+    line-height: 1.06;
+    margin: 0 0 18px;
+    letter-spacing: -1.5px;
+    color: #ffffff;
+  }
+
+  h2 {
+    font-size: clamp(34px, 4.6vw, 56px);
+    line-height: 1.12;
+    margin: 0;
+    color: #ffffff;
+  }
+
+  h3 {
+    font-size: clamp(21px, 2.2vw, 30px);
+    margin: 0 0 14px;
+    color: #bfdbfe;
+  }
+
+  p {
+    font-size: clamp(17px, 1.45vw, 22px);
+    line-height: 1.45;
+    margin: 12px 0;
+    color: #e5e7eb;
+  }
+
+  ul,
+  ol {
+    margin: 18px 0;
+    padding-left: 30px;
+  }
+
+  li {
+    font-size: clamp(17px, 1.42vw, 22px);
+    line-height: 1.42;
+    margin-bottom: 9px;
+    color: #f1f5f9;
+  }
+
+  strong {
+    color: #fde68a;
+  }
+
+  .subtitle {
+    color: #bfdbfe;
+    font-size: clamp(22px, 2.3vw, 32px);
+    margin-bottom: 24px;
+  }
+
+  .divider {
+    width: 120px;
+    height: 5px;
+    border-radius: 999px;
+    background: linear-gradient(90deg, #f59e0b, #3b82f6);
+    margin: 18px 0 26px;
+  }
+
+  .title-slide .divider {
+    margin: 18px auto 28px;
+  }
+
+  .focus-box,
+  .verse,
+  .card,
+  .main-box {
+    border: 1px solid rgba(148, 163, 184, 0.35);
+    background: rgba(15, 23, 42, 0.78);
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.28);
+    backdrop-filter: blur(12px);
+    border-radius: 22px;
+  }
+
+  .focus-box {
+    padding: 24px 30px;
+    margin: 26px auto;
+    max-width: 980px;
+  }
+
+  .verse {
+    position: relative;
+    padding: 26px 32px 28px 36px;
+    margin: 24px 0;
+    border-left: 12px solid #facc15;
+    border-top: 1px solid rgba(250, 204, 21, 0.45);
+    border-right: 1px solid rgba(250, 204, 21, 0.28);
+    border-bottom: 1px solid rgba(250, 204, 21, 0.28);
+    background:
+      linear-gradient(135deg, rgba(250, 204, 21, 0.16), rgba(37, 99, 235, 0.18)),
+      rgba(15, 23, 42, 0.94);
+    box-shadow:
+      0 0 0 1px rgba(250, 204, 21, 0.18),
+      0 24px 70px rgba(250, 204, 21, 0.12),
+      0 24px 70px rgba(0, 0, 0, 0.36);
+    color: #ffffff;
+    font-size: clamp(25px, 2.65vw, 40px);
+    line-height: 1.35;
+    font-weight: 750;
+  }
+
+  .verse::before {
+    content: "📖";
+    position: absolute;
+    top: -18px;
+    right: 24px;
+    font-size: 42px;
+    opacity: 0.95;
+    filter: drop-shadow(0 6px 14px rgba(0, 0, 0, 0.45));
+  }
+
+  .verse strong {
+    display: block;
+    margin-bottom: 12px;
+    color: #facc15;
+    font-size: clamp(26px, 2.85vw, 42px);
+    line-height: 1.1;
+    font-weight: 900;
+    letter-spacing: -0.5px;
+    text-shadow: 0 3px 16px rgba(250, 204, 21, 0.18);
+  }
+
+  .card .verse {
+    padding: 18px 22px 20px 24px;
+    margin: 14px 0;
+    border-left-width: 8px;
+    font-size: clamp(19px, 1.65vw, 26px);
+  }
+
+  .card .verse strong {
+    font-size: clamp(21px, 1.85vw, 29px);
+  }
+
+  .main-point {
+    color: #fbbf24;
+    font-weight: 800;
+  }
+
+  .blue-point {
+    color: #93c5fd;
+    font-weight: 800;
+  }
+
+  .green-point {
+    color: #86efac;
+    font-weight: 800;
+  }
+
+  .red-point {
+    color: #fca5a5;
+    font-weight: 800;
+  }
+
+  .two-columns {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 22px;
+    margin: 20px 0;
+  }
+
+  .three-columns {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 18px;
+    margin: 20px 0;
+  }
+
+  .card {
+    padding: 20px 22px;
+  }
+
+  .card h3 {
+    color: #fde68a;
+  }
+
+  .card p,
+  .card li {
+    font-size: clamp(15px, 1.22vw, 19px);
+  }
+
+  .main-box {
+    padding: 24px 28px;
+    margin: 22px 0;
+    border-left: 6px solid #3b82f6;
+  }
+
+  .number-list {
+    list-style: none;
+    padding-left: 0;
+    counter-reset: item;
+  }
+
+  .number-list li {
+    counter-increment: item;
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+  }
+
+  .number-list li::before {
+    content: counter(item);
+    width: 36px;
+    height: 36px;
+    min-width: 36px;
+    border-radius: 999px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, #f59e0b, #2563eb);
+    color: #fff;
+    font-weight: 800;
+    font-size: 18px;
+    margin-top: 1px;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+    border-radius: 18px;
+    overflow: hidden;
+    background: rgba(15, 23, 42, 0.75);
+  }
+
+  th,
+  td {
+    border: 1px solid rgba(148, 163, 184, 0.32);
+    padding: 14px 16px;
+    text-align: left;
+    vertical-align: top;
+    color: #f8fafc;
+    font-size: clamp(15px, 1.28vw, 20px);
+  }
+
+  th {
+    background: rgba(37, 99, 235, 0.35);
+    color: #bfdbfe;
+  }
+
+  .slide-icon {
+    position: absolute;
+    right: 54px;
+    top: 40px;
+    font-size: 56px;
+    opacity: 0.22;
+    filter: drop-shadow(0 8px 20px rgba(0,0,0,0.3));
+  }
+
+  .title-slide .slide-icon {
+    position: static;
+    font-size: 72px;
+    opacity: 1;
+    margin-top: 18px;
+  }
+
+  .footer {
+    position: absolute;
+    left: 42px;
+    right: 42px;
+    bottom: 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: #94a3b8;
+    font-size: 14px;
+  }
+
+  .progress {
+    position: fixed;
+    left: 0;
+    top: 0;
+    height: 5px;
+    background: linear-gradient(90deg, #f59e0b, #3b82f6, #22c55e);
+    width: 0%;
+    z-index: 2147483647 !important;
+    transition: width 0.2s ease;
+  }
+
+  .hint {
+    position: fixed;
+    top: 16px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 2147483647 !important;
+    color: #cbd5e1;
+    background: rgba(15, 23, 42, 0.72);
+    border: 1px solid rgba(148, 163, 184, 0.25);
+    padding: 8px 14px;
+    border-radius: 999px;
+    font-size: 13px;
+    max-width: calc(100vw - 40px) !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    white-space: nowrap !important;
+  }
+
+  .controls {
+    position: fixed !important;
+    left: 50% !important;
+    right: auto !important;
+    top: auto !important;
+    bottom: 18px !important;
+    transform: translateX(-50%) !important;
+    z-index: 2147483647 !important;
+    display: flex !important;
+    gap: 10px !important;
+    align-items: center !important;
+    justify-content: center !important;
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    pointer-events: auto !important;
+  }
+
+  button {
+    appearance: none !important;
+    -webkit-appearance: none !important;
+    border: 1px solid rgba(148, 163, 184, 0.45) !important;
+    background: rgba(30, 41, 59, 0.96) !important;
+    color: #fff !important;
+    border-radius: 999px !important;
+    padding: 10px 16px !important;
+    cursor: pointer !important;
+    font-weight: 700 !important;
+    font-size: 14px !important;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.36) !important;
+    pointer-events: auto !important;
+  }
+
+  button:hover {
+    background: rgba(37, 99, 235, 0.98) !important;
+  }
+
+  button:disabled {
+    opacity: 0.45 !important;
+    cursor: not-allowed !important;
+  }
+
+  .slide-counter {
+    padding: 10px 16px !important;
+    border-radius: 999px !important;
+    background: rgba(15, 23, 42, 0.96) !important;
+    color: #e2e8f0 !important;
+    border: 1px solid rgba(148, 163, 184, 0.45) !important;
+    font-weight: 700 !important;
+    min-width: 76px !important;
+    text-align: center !important;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.36) !important;
+  }
+
+  .compact-slide .content {
+    max-height: calc(100vh - 135px);
+  }
+
+  .compact-slide h2 {
+    font-size: clamp(30px, 3.8vw, 48px);
+    line-height: 1.08;
+  }
+
+  .compact-slide .divider {
+    margin: 14px 0 18px;
+  }
+
+  .compact-slide .verse {
+    padding: 18px 24px 20px 28px;
+    margin: 14px 0;
+    border-left-width: 9px;
+    font-size: clamp(21px, 2.05vw, 31px);
+    line-height: 1.28;
+  }
+
+  .compact-slide .verse strong {
+    font-size: clamp(22px, 2.25vw, 34px);
+    margin-bottom: 8px;
+  }
+
+  .compact-slide p,
+  .compact-slide li {
+    font-size: clamp(16px, 1.3vw, 20px);
+    line-height: 1.35;
+  }
+
+  .compact-slide .main-box {
+    padding: 18px 22px;
+    margin: 16px 0;
+  }
+
+  body > iframe,
+  body > object,
+  body > embed {
+    display: none !important;
+    visibility: hidden !important;
+    opacity: 0 !important;
+    pointer-events: none !important;
+  }
+
+  body > *:not(.progress):not(.hint):not(.presentation):not(.controls):not(script):not(style) {
+    display: none !important;
+    visibility: hidden !important;
+    opacity: 0 !important;
+    pointer-events: none !important;
+  }
+
+  .slide {
+    z-index: 2147483001 !important;
+  }
+
+  .slide.active .content {
+    position: relative !important;
+    z-index: 2147483002 !important;
+  }
+
+  button:focus,
+  button:active {
+    outline: none !important;
+    background: rgba(37, 99, 235, 0.98) !important;
+  }
+
+  @media (max-width: 900px) {
+    .slide {
+      padding: 42px 28px 82px !important;
+    }
+
+    .content {
+      max-width: 100% !important;
+      max-height: calc(100vh - 132px);
+    }
+
+    .two-columns,
+    .three-columns {
+      grid-template-columns: 1fr;
+      gap: 12px;
+    }
+
+    .slide-icon {
+      right: 24px;
+      top: 34px;
+      font-size: 44px;
+    }
+
+    .verse {
+      padding: 22px 24px 24px 28px;
+      margin: 20px 0;
+      border-left-width: 9px;
+      font-size: clamp(22px, 5.5vw, 34px);
+    }
+
+    .verse strong {
+      font-size: clamp(24px, 6vw, 38px);
+    }
+
+    .footer {
+      left: 24px;
+      right: 24px;
+      bottom: 60px;
+      font-size: 12px;
+    }
+
+    .hint {
+      display: none;
+    }
+
+    button {
+      padding: 9px 12px !important;
+      font-size: 13px !important;
+    }
+
+    .slide-counter {
+      padding: 9px 12px !important;
+      font-size: 13px !important;
+      min-width: 68px !important;
+    }
+  }
+  </style>
+</head>
+
+<body>
+  <div class="progress" id="progress"></div>
+  <div class="hint">Dùng phím ← → hoặc Space để chuyển slide | F11 để toàn màn hình</div>
+
+  <main class="presentation">
+
+    <!-- Slide 1 -->
+    <section class="slide active title-slide">
+      <div class="content">
+        <h1>Bài 6: Sự Cứu Rỗi</h1>
+        <p class="subtitle">Giáo Lý Căn Bản — Sự cứu rỗi trong Đức Chúa Giê-xu Christ</p>
+        <div class="verse">
+          <strong>Câu gốc: Công vụ 4:12</strong>
+          “Chẳng có sự cứu rỗi trong đấng nào khác; vì ở dưới trời,
+          chẳng có danh nào khác ban cho loài người,
+          để chúng ta phải nhờ đó mà được cứu.”
+        </div>
+        <div class="slide-icon">✝️</div>
+      </div>
+      <div class="footer"><span>Bài 6 – Sự Cứu Rỗi</span><span>Slide 1 / 25</span></div>
+    </section>
+
+    <!-- Slide 2 -->
+    <section class="slide">
+      <div class="slide-icon">🎁</div>
+      <div class="content">
+        <h2>Chủ đề chính</h2>
+        <div class="divider"></div>
+        <div class="main-box">
+          <p>
+            <strong>Sự cứu rỗi chỉ có trong Đức Chúa Giê-xu Christ.</strong>
+          </p>
+          <p>
+            Sự cứu rỗi không chỉ là được tha tội hay lên thiên đàng,
+            nhưng là được giải cứu khỏi <strong>tội lỗi</strong> và
+            <strong>hậu quả của tội lỗi</strong> trong <strong>linh, hồn và xác</strong>.
+          </p>
+        </div>
+        <div class="focus-box">
+          <p>
+            <span class="main-point">Hình ảnh chính:</span>
+            Sự cứu rỗi giống như một gói quà lớn Đức Chúa Trời ban cho người tin trong Chúa Giê-xu.
+          </p>
+        </div>
+      </div>
+      <div class="footer"><span>Bài 6 – Sự Cứu Rỗi</span><span>Slide 2 / 25</span></div>
+    </section>
+
+    <!-- Slide 3 -->
+    <section class="slide compact-slide">
+      <div class="slide-icon">🎯</div>
+      <div class="content">
+        <h2>Mục tiêu bài học</h2>
+        <div class="divider"></div>
+        <ol class="number-list">
+          <li><span>Hiểu sự cứu rỗi chỉ có trong Đức Chúa Giê-xu Christ.</span></li>
+          <li><span>Hiểu “được cứu” không chỉ là lên thiên đàng.</span></li>
+          <li><span>Biết sự cứu rỗi bao gồm tha tội, giải thoát, chữa lành, phục hồi và sự sống mới.</span></li>
+          <li><span>Hiểu sự cứu rỗi liên hệ đến linh, hồn và xác.</span></li>
+          <li><span>Biết người tin Chúa đã được cứu, đang được cứu và sẽ được cứu trọn vẹn.</span></li>
+        </ol>
+      </div>
+      <div class="footer"><span>Bài 6 – Sự Cứu Rỗi</span><span>Slide 3 / 25</span></div>
+    </section>
+
+    <!-- Slide 4 -->
+    <section class="slide">
+      <div class="slide-icon">❓</div>
+      <div class="content">
+        <h2>“Được cứu” là được gì?</h2>
+        <div class="divider"></div>
+        <p>Nhiều người thường nói: <strong>“Tin Chúa thì được cứu.”</strong></p>
+        <div class="two-columns">
+          <div class="card">
+            <h3>Cần hỏi thêm</h3>
+            <ul>
+              <li>Được cứu khỏi điều gì?</li>
+              <li>Được cứu để nhận điều gì?</li>
+              <li>Sự cứu rỗi ảnh hưởng thế nào đến đời sống hiện tại?</li>
+            </ul>
+          </div>
+          <div class="card">
+            <h3>Ví dụ</h3>
+            <p>
+              Một người rơi xuống sông và sắp chết đuối.
+              Khi được kéo lên, người ấy được cứu khỏi nguy hiểm ngay lúc đó.
+            </p>
+            <p>
+              Chúa Giê-xu không chỉ cứu chúng ta trong tương lai,
+              nhưng bắt đầu giải cứu chúng ta ngay hôm nay.
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="footer"><span>Bài 6 – Sự Cứu Rỗi</span><span>Slide 4 / 25</span></div>
+    </section>
+
+    <!-- Slide 5 -->
+    <section class="slide">
+      <div class="slide-icon">🚪</div>
+      <div class="content">
+        <h2>Chỉ có sự cứu rỗi trong Chúa Giê-xu</h2>
+        <div class="divider"></div>
+        <div class="verse">
+          <strong>Công vụ 4:12</strong>
+          “Chẳng có sự cứu rỗi trong đấng nào khác...”
+        </div>
+        <ul>
+          <li>Không ai khác có thể cứu con người khỏi tội lỗi.</li>
+          <li>Không tôn giáo nào tự nó có thể cứu con người.</li>
+          <li>Không việc lành nào đủ để trả nợ tội.</li>
+          <li>Chỉ có Chúa Giê-xu là Đấng Cứu Rỗi.</li>
+        </ul>
+      </div>
+      <div class="footer"><span>Bài 6 – Sự Cứu Rỗi</span><span>Slide 5 / 25</span></div>
+    </section>
+
+    <!-- Slide 6 -->
+    <section class="slide">
+      <div class="slide-icon">💊</div>
+      <div class="content">
+        <h2>Ví dụ: Đúng thuốc mới trị đúng bệnh</h2>
+        <div class="divider"></div>
+        <div class="main-box">
+          <p>
+            Một người bị bệnh nặng cần đúng loại thuốc đặc trị.
+            Người ấy có thể uống nước bổ, ăn thức ăn tốt, tập thể dục,
+            nhưng nếu không dùng đúng thuốc trị bệnh, bệnh vẫn còn.
+          </p>
+        </div>
+        <p>
+          <strong>Tội lỗi</strong> là căn bệnh sâu xa của con người.
+          Việc lành, đạo đức, tôn giáo có thể giống như “nước bổ”,
+          nhưng chỉ <span class="main-point">huyết của Chúa Giê-xu</span>
+          mới giải quyết được tội lỗi.
+        </p>
+      </div>
+      <div class="footer"><span>Bài 6 – Sự Cứu Rỗi</span><span>Slide 6 / 25</span></div>
+    </section>
+
+    <!-- Slide 7 -->
+    <section class="slide">
+      <div class="slide-icon">🌉</div>
+      <div class="content">
+        <h2>Chúa Giê-xu là con đường duy nhất</h2>
+        <div class="divider"></div>
+        <div class="verse">
+          <strong>Giăng 14:6</strong>
+          “Ta là đường đi, lẽ thật, và sự sống;
+          chẳng bởi Ta thì không ai được đến cùng Cha.”
+        </div>
+        <div class="main-box">
+          <p>
+            Nếu chỉ có một cây cầu bắc qua vực sâu,
+            người muốn qua bên kia phải đi qua cây cầu đó.
+          </p>
+          <p>
+            Tội lỗi tạo nên vực sâu ngăn cách con người với Đức Chúa Trời.
+            <strong>Chúa Giê-xu là cây cầu duy nhất</strong>
+            nối con người với Đức Chúa Trời.
+          </p>
+        </div>
+      </div>
+      <div class="footer"><span>Bài 6 – Sự Cứu Rỗi</span><span>Slide 7 / 25</span></div>
+    </section>
+
+    <!-- Slide 8 -->
+    <section class="slide compact-slide">
+      <div class="slide-icon">🐑</div>
+      <div class="content">
+        <h2>Chúa Giê-xu là Chiên Con của Đức Chúa Trời</h2>
+        <div class="divider"></div>
+        <div class="verse">
+          <strong>Giăng 1:29</strong>
+          “Kìa, Chiên con của Đức Chúa Trời,
+          là Đấng cất tội lỗi thế gian đi.”
+        </div>
+        <div class="two-columns">
+          <div class="card">
+            <h3>Cựu Ước</h3>
+            <p>
+              Trong Lễ Vượt Qua, dân Y-sơ-ra-ên được bảo vệ
+              nhờ huyết chiên con bôi trên cửa nhà.
+            </p>
+          </div>
+          <div class="card">
+            <h3>Tân Ước</h3>
+            <p>
+              Chúa Giê-xu là Chiên Con thật.
+              Ai tin nhận Ngài được che phủ bởi huyết Ngài
+              và được cứu khỏi sự đoán phạt.
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="footer"><span>Bài 6 – Sự Cứu Rỗi</span><span>Slide 8 / 25</span></div>
+    </section>
+
+    <!-- Slide 9 -->
+    <section class="slide">
+      <div class="slide-icon">📦</div>
+      <div class="content">
+        <h2>Ý nghĩa rộng của sự cứu rỗi</h2>
+        <div class="divider"></div>
+        <div class="three-columns">
+          <div class="card">
+            <h3>Đối với tội lỗi</h3>
+            <ul>
+              <li>Được tha tội.</li>
+              <li>Được xưng công chính.</li>
+              <li>Được cứu khỏi đoán phạt.</li>
+            </ul>
+          </div>
+          <div class="card">
+            <h3>Đối với đời sống</h3>
+            <ul>
+              <li>Được giải cứu.</li>
+              <li>Được giải thoát.</li>
+              <li>Được phục hồi.</li>
+            </ul>
+          </div>
+          <div class="card">
+            <h3>Đối với tương lai</h3>
+            <ul>
+              <li>Được ban sự sống mới.</li>
+              <li>Được cứu chuộc thân thể.</li>
+              <li>Được hy vọng đời đời.</li>
+            </ul>
+          </div>
+        </div>
+        <p><span class="main-point">Sự cứu rỗi là công việc toàn diện của Đức Chúa Trời.</span></p>
+      </div>
+      <div class="footer"><span>Bài 6 – Sự Cứu Rỗi</span><span>Slide 9 / 25</span></div>
+    </section>
+
+    <!-- Slide 10 -->
+    <section class="slide">
+      <div class="slide-icon">🏥</div>
+      <div class="content">
+        <h2>Ví dụ: Chúa cứu cách toàn diện</h2>
+        <div class="divider"></div>
+        <div class="main-box">
+          <p>
+            Một người bị tai nạn giao thông.
+            Bác sĩ không chỉ băng bó bên ngoài,
+            nhưng còn kiểm tra bên trong, phẫu thuật nếu cần,
+            cho thuốc, phục hồi chức năng và theo dõi lâu dài.
+          </p>
+        </div>
+        <p>
+          Chúa cũng cứu chúng ta cách toàn diện.
+          Ngài không chỉ tha tội bên ngoài,
+          nhưng còn <strong>chữa lành, phục hồi, đổi mới</strong>
+          và dẫn chúng ta vào đời sống mới.
+        </p>
+      </div>
+      <div class="footer"><span>Bài 6 – Sự Cứu Rỗi</span><span>Slide 10 / 25</span></div>
+    </section>
+
+    <!-- Slide 11 -->
+    <section class="slide compact-slide">
+      <div class="slide-icon">⛓️</div>
+      <div class="content">
+        <h2>Được cứu khỏi tội lỗi</h2>
+        <div class="divider"></div>
+        <div class="verse">
+          <strong>Công vụ 16:31</strong>
+          “Hãy tin Đức Chúa Jêsus,
+          thì ngươi và cả nhà đều sẽ được cứu rỗi.”
+        </div>
+        <div class="main-box">
+          <p>
+            Một người đang ở trong tù vì không trả nổi món nợ.
+            Có người đến trả thay toàn bộ món nợ.
+            Người ấy được thả tự do không phải vì tự trả được,
+            nhưng vì có người trả thay.
+          </p>
+        </div>
+        <p>
+          Chúng ta không thể trả món nợ tội lỗi.
+          <span class="main-point">Chúa Giê-xu đã trả thay bằng chính huyết Ngài.</span>
+        </p>
+      </div>
+      <div class="footer"><span>Bài 6 – Sự Cứu Rỗi</span><span>Slide 11 / 25</span></div>
+    </section>
+
+    <!-- Slide 12 -->
+    <section class="slide compact-slide">
+      <div class="slide-icon">❤️‍🩹</div>
+      <div class="content">
+        <h2>Được chữa lành và giải cứu</h2>
+        <div class="divider"></div>
+        <div class="verse">
+          <strong>Mác 5:34</strong>
+          “Hỡi con gái ta, đức tin con đã cứu con;
+          hãy đi cho bình an và được lành bịnh.”
+        </div>
+        <div class="verse">
+          <strong>Thi Thiên 34:17</strong>
+          “Người công bình kêu cầu, Đức Giê-hô-va bèn nghe,
+          và giải cứu người khỏi các sự gian truân.”
+        </div>
+        <p>
+          Chúa không chỉ quan tâm đến linh hồn,
+          nhưng cũng quan tâm đến <strong>thân thể, nỗi đau,
+          sự tổn thương và hoàn cảnh</strong> của con người.
+        </p>
+      </div>
+      <div class="footer"><span>Bài 6 – Sự Cứu Rỗi</span><span>Slide 12 / 25</span></div>
+    </section>
+
+    <!-- Slide 13 -->
+    <section class="slide">
+      <div class="slide-icon">⚠️</div>
+      <div class="content">
+        <h2>Vì sao con người cần sự cứu rỗi?</h2>
+        <div class="divider"></div>
+        <div class="two-columns">
+          <div class="card">
+            <h3>Rô-ma 3:23</h3>
+            <p>
+              “Vì mọi người đều đã phạm tội,
+              thiếu mất sự vinh hiển của Đức Chúa Trời.”
+            </p>
+          </div>
+          <div class="card">
+            <h3>Rô-ma 6:23</h3>
+            <p>
+              “Vì tiền công của tội lỗi là sự chết;
+              nhưng sự ban cho của Đức Chúa Trời là sự sống đời đời
+              trong Đức Chúa Jêsus Christ.”
+            </p>
+          </div>
+        </div>
+        <ul>
+          <li>Mọi người đều phạm tội.</li>
+          <li>Tội lỗi đem đến sự chết.</li>
+          <li>Con người không thể tự cứu mình.</li>
+        </ul>
+      </div>
+      <div class="footer"><span>Bài 6 – Sự Cứu Rỗi</span><span>Slide 13 / 25</span></div>
+    </section>
+
+    <!-- Slide 14 -->
+    <section class="slide compact-slide">
+      <div class="slide-icon">📏</div>
+      <div class="content">
+        <h2>Ví dụ: Tiêu chuẩn thánh khiết của Đức Chúa Trời</h2>
+        <div class="divider"></div>
+        <div class="main-box">
+          <p>
+            Trong lớp học, có học sinh được 9 điểm, có người 5 điểm,
+            có người 2 điểm. Nhưng nếu tiêu chuẩn là 10 điểm tuyệt đối,
+            thì tất cả đều chưa đạt.
+          </p>
+        </div>
+        <p>
+          Trước mặt con người, có người tốt hơn người khác.
+          Nhưng trước tiêu chuẩn thánh khiết tuyệt đối của Đức Chúa Trời,
+          <strong>mọi người đều thiếu hụt</strong>.
+        </p>
+        <div class="main-box">
+          <p>
+            Một nhánh cây bị cắt khỏi thân cây ban đầu vẫn còn xanh,
+            nhưng vì lìa khỏi nguồn sống, dần dần nó sẽ héo khô.
+          </p>
+        </div>
+      </div>
+      <div class="footer"><span>Bài 6 – Sự Cứu Rỗi</span><span>Slide 14 / 25</span></div>
+    </section>
+
+    <!-- Slide 15 -->
+    <section class="slide">
+      <div class="slide-icon">🪜</div>
+      <div class="content">
+        <h2>Con người không thể tự cứu mình</h2>
+        <div class="divider"></div>
+        <div class="verse">
+          <strong>Ê-phê-sô 2:8-9</strong>
+          “Ấy là nhờ ân điển, bởi đức tin, mà anh em được cứu...
+          ấy chẳng phải bởi việc làm đâu, hầu cho không ai khoe mình.”
+        </div>
+        <div class="main-box">
+          <p>
+            Một người rơi xuống giếng sâu không thể tự kéo mình lên
+            bằng cách nắm tóc mình. Người ấy cần một người ở bên ngoài
+            thả dây xuống cứu.
+          </p>
+        </div>
+        <p>
+          Con người ở trong tội lỗi không thể tự cứu mình bằng sức riêng.
+          <span class="main-point">Chúng ta cần Chúa Giê-xu cứu.</span>
+        </p>
+      </div>
+      <div class="footer"><span>Bài 6 – Sự Cứu Rỗi</span><span>Slide 15 / 25</span></div>
+    </section>
+
+    <!-- Slide 16 -->
+    <section class="slide compact-slide">
+      <div class="slide-icon">🧬</div>
+      <div class="content">
+        <h2>Sự cứu rỗi giải quyết các loại tội lỗi</h2>
+        <div class="divider"></div>
+        <div class="three-columns">
+          <div class="card">
+            <h3>Tội tổ tông</h3>
+            <p>
+              Do A-đam sa ngã, nhân loại sinh ra trong tình trạng tội lỗi
+              và chết thuộc linh.
+            </p>
+            <p><strong>Ví dụ:</strong> sinh ra trong gia đình đang mắc nợ.</p>
+          </div>
+          <div class="card">
+            <h3>Tội quy gán</h3>
+            <p>
+              Trong A-đam, nhân loại ở dưới sự chết;
+              trong Đấng Christ, người tin được kể là công chính.
+            </p>
+            <p><strong>Ví dụ:</strong> đội trưởng đại diện cả đội.</p>
+          </div>
+          <div class="card">
+            <h3>Tội cá nhân</h3>
+            <p>
+              Những tội trong suy nghĩ, lời nói, hành động và thái độ.
+            </p>
+            <p><strong>Ví dụ:</strong> áo trắng bị dính bùn cần được giặt sạch.</p>
+          </div>
+        </div>
+      </div>
+      <div class="footer"><span>Bài 6 – Sự Cứu Rỗi</span><span>Slide 16 / 25</span></div>
+    </section>
+
+    <!-- Slide 17 -->
+    <section class="slide compact-slide">
+      <div class="slide-icon">👑</div>
+      <div class="content">
+        <h2>Công việc của Đức Chúa Trời trong sự cứu rỗi</h2>
+        <div class="divider"></div>
+        <div class="verse">
+          <strong>Rô-ma 5:8</strong>
+          “Nhưng Đức Chúa Trời tỏ lòng yêu thương Ngài đối với chúng ta,
+          khi chúng ta còn là người có tội,
+          thì Đấng Christ vì chúng ta chịu chết.”
+        </div>
+        <div class="two-columns">
+          <div class="card">
+            <h3>Đức Chúa Trời chủ động</h3>
+            <p>
+              Sự cứu rỗi bắt đầu từ tình yêu của Đức Chúa Trời,
+              không phải từ công lao của con người.
+            </p>
+          </div>
+          <div class="card">
+            <h3>Ví dụ</h3>
+            <p>
+              Người cha vẫn mong chờ đứa con hoang đàng trở về,
+              sẵn sàng tha thứ và phục hồi.
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="footer"><span>Bài 6 – Sự Cứu Rỗi</span><span>Slide 17 / 25</span></div>
+    </section>
+
+    <!-- Slide 18 -->
+    <section class="slide compact-slide">
+      <div class="slide-icon">✝️</div>
+      <div class="content">
+        <h2>Chúa Giê-xu chết thay cho chúng ta</h2>
+        <div class="divider"></div>
+        <div class="verse">
+          <strong>1 Phi-e-rơ 2:24</strong>
+          “Ngài gánh tội lỗi chúng ta trong thân thể Ngài trên cây gỗ...”
+        </div>
+        <ul>
+          <li>Ngài gánh tội lỗi của chúng ta.</li>
+          <li>Ngài chịu hình phạt thay cho chúng ta.</li>
+          <li>Ngài trả món nợ tội thay cho chúng ta.</li>
+          <li>Ngài mở đường cho chúng ta đến với Đức Chúa Trời.</li>
+        </ul>
+        <div class="main-box">
+          <p>
+            <strong>Ví dụ:</strong> Một người không có khả năng trả tiền phạt.
+            Người khác đứng ra trả thay toàn bộ số tiền ấy.
+          </p>
+        </div>
+      </div>
+      <div class="footer"><span>Bài 6 – Sự Cứu Rỗi</span><span>Slide 18 / 25</span></div>
+    </section>
+
+    <!-- Slide 19 -->
+    <section class="slide compact-slide">
+      <div class="slide-icon">🕊️</div>
+      <div class="content">
+        <h2>Đức Thánh Linh tái sinh người tin</h2>
+        <div class="divider"></div>
+        <div class="verse">
+          <strong>Giăng 3:3</strong>
+          “Nếu một người chẳng sanh lại,
+          thì không thể thấy được nước Đức Chúa Trời.”
+        </div>
+        <div class="verse">
+          <strong>Tít 3:5</strong>
+          “Ngài cứu chúng ta bởi sự rửa về sự lại sanh
+          và sự đổi mới của Đức Thánh Linh.”
+        </div>
+        <p>
+          <strong>Tái sinh</strong> là được sinh lại bởi Đức Chúa Trời,
+          nhận sự sống mới từ Ngài.
+        </p>
+      </div>
+      <div class="footer"><span>Bài 6 – Sự Cứu Rỗi</span><span>Slide 19 / 25</span></div>
+    </section>
+
+    <!-- Slide 20 -->
+    <section class="slide">
+      <div class="slide-icon">🔋</div>
+      <div class="content">
+        <h2>Ví dụ: Được kết nối với nguồn sống</h2>
+        <div class="divider"></div>
+        <div class="main-box">
+          <p>
+            Một chiếc điện thoại bên ngoài còn nguyên vẹn,
+            nhưng nếu pin chết hoàn toàn thì không hoạt động.
+            Khi được cắm vào nguồn điện, nó có thể hoạt động trở lại.
+          </p>
+        </div>
+        <p>
+          Con người không có sự sống thuộc linh giống như chiếc điện thoại mất nguồn.
+          <strong>Đức Thánh Linh ban sự sống mới</strong>
+          để con người thật sự kết nối với Đức Chúa Trời.
+        </p>
+      </div>
+      <div class="footer"><span>Bài 6 – Sự Cứu Rỗi</span><span>Slide 20 / 25</span></div>
+    </section>
+
+    <!-- Slide 21 -->
+    <section class="slide compact-slide">
+      <div class="slide-icon">🙋</div>
+      <div class="content">
+        <h2>Đáp ứng của con người</h2>
+        <div class="divider"></div>
+        <div class="verse">
+          <strong>Giăng 1:12</strong>
+          “Nhưng hễ ai đã nhận Ngài,
+          thì Ngài ban cho quyền phép trở nên con cái Đức Chúa Trời.”
+        </div>
+        <div class="verse">
+          <strong>Rô-ma 10:9</strong>
+          “Nếu miệng ngươi xưng Đức Chúa Jêsus ra
+          và lòng ngươi tin rằng Đức Chúa Trời đã khiến Ngài từ kẻ chết sống lại,
+          thì ngươi sẽ được cứu.”
+        </div>
+        <p>
+          Không ai có thể tin thay cho người khác.
+          Mỗi người cần <span class="main-point">tiếp nhận Chúa Giê-xu cách cá nhân</span>.
+        </p>
+      </div>
+      <div class="footer"><span>Bài 6 – Sự Cứu Rỗi</span><span>Slide 21 / 25</span></div>
+    </section>
+
+    <!-- Slide 22 -->
+    <section class="slide compact-slide">
+      <div class="slide-icon">🌳</div>
+      <div class="content">
+        <h2>Không cậy việc lành để được cứu</h2>
+        <div class="divider"></div>
+        <div class="verse">
+          <strong>Ê-phê-sô 2:10</strong>
+          “Vì chúng ta là việc Ngài làm ra,
+          đã được dựng nên trong Đức Chúa Jêsus Christ để làm việc lành.”
+        </div>
+        <div class="main-box">
+          <p>
+            Chúng ta không làm việc lành <strong>để được cứu</strong>.
+            Chúng ta làm việc lành <strong>vì đã được cứu</strong>.
+          </p>
+        </div>
+        <p>
+          <strong>Ví dụ:</strong> Một cây cam không ra trái cam để trở thành cây cam.
+          Nó ra trái cam vì nó đã là cây cam.
+        </p>
+      </div>
+      <div class="footer"><span>Bài 6 – Sự Cứu Rỗi</span><span>Slide 22 / 25</span></div>
+    </section>
+
+    <!-- Slide 23 -->
+    <section class="slide compact-slide">
+      <div class="slide-icon">🧍</div>
+      <div class="content">
+        <h2>Ba phương diện của sự cứu rỗi</h2>
+        <div class="divider"></div>
+        <table>
+          <thead>
+            <tr>
+              <th>Phương diện</th>
+              <th>Tên gọi</th>
+              <th>Thời điểm</th>
+              <th>Được cứu khỏi điều gì?</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Linh</strong></td>
+              <td>Tái sinh, dựng nên mới</td>
+              <td>Đã xảy ra khi tin Chúa</td>
+              <td>Hình phạt của tội lỗi</td>
+            </tr>
+            <tr>
+              <td><strong>Hồn</strong></td>
+              <td>Đổi mới tâm trí, nên thánh</td>
+              <td>Đang diễn ra mỗi ngày</td>
+              <td>Ảnh hưởng và thói quen của tội lỗi</td>
+            </tr>
+            <tr>
+              <td><strong>Xác</strong></td>
+              <td>Cứu chuộc thân thể</td>
+              <td>Sẽ hoàn tất trong tương lai</td>
+              <td>Sự hiện diện của tội lỗi</td>
+            </tr>
+          </tbody>
+        </table>
+        <p>
+          <span class="main-point">Linh: đã được cứu.</span>
+          <span class="blue-point">Hồn: đang được cứu.</span>
+          <span class="green-point">Xác: sẽ được cứu.</span>
+        </p>
+      </div>
+      <div class="footer"><span>Bài 6 – Sự Cứu Rỗi</span><span>Slide 23 / 25</span></div>
+    </section>
+
+    <!-- Slide 24 -->
+    <section class="slide compact-slide">
+      <div class="slide-icon">🎁</div>
+      <div class="content">
+        <h2>Nội dung của “gói quà cứu rỗi”</h2>
+        <div class="divider"></div>
+        <div class="three-columns">
+          <div class="card">
+            <h3>Được tha tội</h3>
+            <p>Chúa Giê-xu trả món nợ tội lỗi thay cho chúng ta.</p>
+          </div>
+          <div class="card">
+            <h3>Được xưng công chính</h3>
+            <p>Đức Chúa Trời kể chúng ta là công chính trong Đấng Christ.</p>
+          </div>
+          <div class="card">
+            <h3>Được giải thoát</h3>
+            <p>Được giải thoát khỏi quyền lực tối tăm và sự nô lệ của tội lỗi.</p>
+          </div>
+          <div class="card">
+            <h3>Được chữa lành</h3>
+            <p>Chúa có quyền chữa lành thân thể, tâm hồn và đời sống.</p>
+          </div>
+          <div class="card">
+            <h3>Được phục hồi</h3>
+            <p>Chúa phục hồi bình an, niềm vui, nhân phẩm và mục đích sống.</p>
+          </div>
+          <div class="card">
+            <h3>Được sống trong phước hạnh</h3>
+            <p>Sống trong sự cung ứng, quản lý trung tín và không bị nô lệ bởi sợ hãi.</p>
+          </div>
+        </div>
+      </div>
+      <div class="footer"><span>Bài 6 – Sự Cứu Rỗi</span><span>Slide 24 / 25</span></div>
+    </section>
+
+    <!-- Slide 25 -->
+    <section class="slide compact-slide">
+      <div class="slide-icon">🌅</div>
+      <div class="content">
+        <h2>Kết luận</h2>
+        <div class="divider"></div>
+        <div class="verse">
+          <strong>Hê-bơ-rơ 2:3</strong>
+          “Nếu chúng ta còn trễ nải sự cứu rỗi lớn dường ấy,
+          thì làm sao tránh khỏi được?”
+        </div>
+        <div class="main-box">
+          <p>
+            Sự cứu rỗi là món quà lớn Đức Chúa Trời ban cho con người
+            qua Đức Chúa Giê-xu Christ.
+          </p>
+          <p>
+            Chúng ta không thể tự cứu mình bằng việc lành, đạo đức hay công đức.
+            Chúng ta chỉ có thể nhận sự cứu rỗi bởi
+            <strong>đức tin nơi Chúa Giê-xu</strong>.
+          </p>
+        </div>
+        <ul>
+          <li><strong>Đã được cứu</strong> trong phần linh.</li>
+          <li><strong>Đang được cứu</strong> trong phần hồn.</li>
+          <li><strong>Sẽ được cứu trọn vẹn</strong> trong phần xác.</li>
+        </ul>
+      </div>
+      <div class="footer"><span>Bài 6 – Sự Cứu Rỗi</span><span>Slide 25 / 25</span></div>
+    </section>
+
+  </main>
+
+  <div class="controls" id="controls">
+    <button type="button" id="prevBtn">◀ Trước</button>
+    <div class="slide-counter" id="counter">1 / 25</div>
+    <button type="button" id="nextBtn">Sau ▶</button>
+  </div>
+
+  <script>
+  const slides = Array.from(document.querySelectorAll(".slide"));
+  const counter = document.getElementById("counter");
+  const progress = document.getElementById("progress");
+  const prevBtn = document.getElementById("prevBtn");
+  const nextBtn = document.getElementById("nextBtn");
+
+  let currentSlide = 0;
+
+  function updateSlide() {
+    slides.forEach((slide, index) => {
+      slide.classList.toggle("active", index === currentSlide);
+    });
+
+    counter.textContent = `${currentSlide + 1} / ${slides.length}`;
+
+    if (progress) {
+      progress.style.width = `${((currentSlide + 1) / slides.length) * 100}%`;
+    }
+
+    document.querySelectorAll(".footer").forEach((footer, index) => {
+      const spans = footer.querySelectorAll("span");
+      if (spans[1]) {
+        spans[1].textContent = `Slide ${index + 1} / ${slides.length}`;
+      }
+    });
+
+    if (prevBtn) {
+      prevBtn.disabled = currentSlide === 0;
+    }
+
+    if (nextBtn) {
+      nextBtn.disabled = currentSlide === slides.length - 1;
+    }
+  }
+
+  function nextSlide() {
+    if (currentSlide < slides.length - 1) {
+      currentSlide++;
+      updateSlide();
+    }
+  }
+
+  function prevSlide() {
+    if (currentSlide > 0) {
+      currentSlide--;
+      updateSlide();
+    }
+  }
+
+  if (prevBtn) {
+    prevBtn.addEventListener("click", function(event) {
+      event.preventDefault();
+      prevSlide();
+    });
+  }
+
+  if (nextBtn) {
+    nextBtn.addEventListener("click", function(event) {
+      event.preventDefault();
+      nextSlide();
+    });
+  }
+
+  document.addEventListener("keydown", function(event) {
+    if (
+      event.key === "ArrowRight" ||
+      event.key === " " ||
+      event.key === "PageDown"
+    ) {
+      event.preventDefault();
+      nextSlide();
+    }
+
+    if (
+      event.key === "ArrowLeft" ||
+      event.key === "PageUp"
+    ) {
+      event.preventDefault();
+      prevSlide();
+    }
+
+    if (event.key === "Home") {
+      currentSlide = 0;
+      updateSlide();
+    }
+
+    if (event.key === "End") {
+      currentSlide = slides.length - 1;
+      updateSlide();
+    }
+  });
+
+  window.nextSlide = nextSlide;
+  window.prevSlide = prevSlide;
+
+  updateSlide();
+  </script>
+</body>
+</html>
