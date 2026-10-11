@@ -1,0 +1,1307 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Báp-têm Bằng Nước | Slide HTML</title>
+
+  <style>
+  * {
+    box-sizing: border-box;
+  }
+
+  html,
+  body {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    background: #020617 !important;
+    overflow: hidden !important;
+    font-family: "Segoe UI", Arial, sans-serif;
+    color: #f8fafc;
+  }
+
+  .presentation {
+    position: fixed !important;
+    inset: 0 !important;
+    width: 100vw !important;
+    height: 100vh !important;
+    overflow: hidden !important;
+    background:
+      radial-gradient(circle at top left, rgba(59, 130, 246, 0.22), transparent 36%),
+      radial-gradient(circle at bottom right, rgba(245, 158, 11, 0.16), transparent 34%),
+      #020617 !important;
+    z-index: 2147483000 !important;
+  }
+
+  .slide {
+    width: 100vw !important;
+    height: 100vh !important;
+    min-width: 100vw !important;
+    min-height: 100vh !important;
+    position: absolute !important;
+    inset: 0 !important;
+    overflow: hidden !important;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 58px 72px 92px;
+  }
+
+  .slide.active {
+    display: flex !important;
+    animation: fadeIn 0.35s ease-in-out;
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .content {
+    width: 100%;
+    max-width: 1180px;
+    max-height: calc(100vh - 145px);
+    overflow: hidden;
+  }
+
+  .title-slide {
+    text-align: center;
+  }
+
+  h1 {
+    font-size: clamp(42px, 6vw, 78px);
+    line-height: 1.06;
+    margin: 0 0 18px;
+    letter-spacing: -1.5px;
+    color: #ffffff;
+  }
+
+  h2 {
+    font-size: clamp(34px, 4.6vw, 56px);
+    line-height: 1.12;
+    margin: 0;
+    color: #ffffff;
+  }
+
+  h3 {
+    font-size: clamp(21px, 2.2vw, 30px);
+    margin: 0 0 14px;
+    color: #bfdbfe;
+  }
+
+  p {
+    font-size: clamp(17px, 1.45vw, 22px);
+    line-height: 1.45;
+    margin: 12px 0;
+    color: #e5e7eb;
+  }
+
+  ul,
+  ol {
+    margin: 18px 0;
+    padding-left: 30px;
+  }
+
+  li {
+    font-size: clamp(17px, 1.42vw, 22px);
+    line-height: 1.42;
+    margin-bottom: 9px;
+    color: #f1f5f9;
+  }
+
+  strong {
+    color: #fde68a;
+  }
+
+  .subtitle {
+    color: #bfdbfe;
+    font-size: clamp(22px, 2.3vw, 32px);
+    margin-bottom: 24px;
+  }
+
+  .divider {
+    width: 120px;
+    height: 5px;
+    border-radius: 999px;
+    background: linear-gradient(90deg, #f59e0b, #3b82f6);
+    margin: 18px 0 26px;
+  }
+
+  .title-slide .divider {
+    margin: 18px auto 28px;
+  }
+
+  .focus-box,
+  .verse,
+  .card,
+  .main-box {
+    border: 1px solid rgba(148, 163, 184, 0.35);
+    background: rgba(15, 23, 42, 0.78);
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.28);
+    backdrop-filter: blur(12px);
+    border-radius: 22px;
+  }
+
+  .focus-box {
+    padding: 24px 30px;
+    margin: 26px auto;
+    max-width: 980px;
+  }
+
+  .verse {
+    position: relative;
+    padding: 26px 32px 28px 36px;
+    margin: 24px 0;
+    border-left: 12px solid #facc15;
+    border-top: 1px solid rgba(250, 204, 21, 0.45);
+    border-right: 1px solid rgba(250, 204, 21, 0.28);
+    border-bottom: 1px solid rgba(250, 204, 21, 0.28);
+    background:
+      linear-gradient(135deg, rgba(250, 204, 21, 0.16), rgba(37, 99, 235, 0.18)),
+      rgba(15, 23, 42, 0.94);
+    box-shadow:
+      0 0 0 1px rgba(250, 204, 21, 0.18),
+      0 24px 70px rgba(250, 204, 21, 0.12),
+      0 24px 70px rgba(0, 0, 0, 0.36);
+    color: #ffffff;
+    font-size: clamp(25px, 2.65vw, 40px);
+    line-height: 1.35;
+    font-weight: 750;
+  }
+
+  .verse::before {
+    content: "📖";
+    position: absolute;
+    top: -18px;
+    right: 24px;
+    font-size: 42px;
+    opacity: 0.95;
+    filter: drop-shadow(0 6px 14px rgba(0, 0, 0, 0.45));
+  }
+
+  .verse strong {
+    display: block;
+    margin-bottom: 12px;
+    color: #facc15;
+    font-size: clamp(26px, 2.85vw, 42px);
+    line-height: 1.1;
+    font-weight: 900;
+    letter-spacing: -0.5px;
+    text-shadow: 0 3px 16px rgba(250, 204, 21, 0.18);
+  }
+
+  .main-point {
+    color: #fbbf24;
+    font-weight: 800;
+  }
+
+  .blue-point {
+    color: #93c5fd;
+    font-weight: 800;
+  }
+
+  .green-point {
+    color: #86efac;
+    font-weight: 800;
+  }
+
+  .red-point {
+    color: #fca5a5;
+    font-weight: 800;
+  }
+
+  .two-columns {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 22px;
+    margin: 20px 0;
+  }
+
+  .three-columns {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 18px;
+    margin: 20px 0;
+  }
+
+  .card {
+    padding: 20px 22px;
+  }
+
+  .card h3 {
+    color: #fde68a;
+  }
+
+  .card p,
+  .card li {
+    font-size: clamp(15px, 1.22vw, 19px);
+  }
+
+  .main-box {
+    padding: 24px 28px;
+    margin: 22px 0;
+    border-left: 6px solid #3b82f6;
+  }
+
+  .number-list {
+    list-style: none;
+    padding-left: 0;
+    counter-reset: item;
+  }
+
+  .number-list li {
+    counter-increment: item;
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+  }
+
+  .number-list li::before {
+    content: counter(item);
+    width: 36px;
+    height: 36px;
+    min-width: 36px;
+    border-radius: 999px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, #f59e0b, #2563eb);
+    color: #fff;
+    font-weight: 800;
+    font-size: 18px;
+    margin-top: 1px;
+  }
+
+  .slide-icon {
+    position: absolute;
+    right: 54px;
+    top: 40px;
+    font-size: 56px;
+    opacity: 0.22;
+    filter: drop-shadow(0 8px 20px rgba(0,0,0,0.3));
+  }
+
+  .title-slide .slide-icon {
+    position: static;
+    font-size: 72px;
+    opacity: 1;
+    margin-top: 18px;
+  }
+
+  .footer {
+    position: absolute;
+    left: 42px;
+    right: 42px;
+    bottom: 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: #94a3b8;
+    font-size: 14px;
+  }
+
+  .progress {
+    position: fixed;
+    left: 0;
+    top: 0;
+    height: 5px;
+    background: linear-gradient(90deg, #f59e0b, #3b82f6, #22c55e);
+    width: 0%;
+    z-index: 2147483647 !important;
+    transition: width 0.2s ease;
+  }
+
+  .hint {
+    position: fixed;
+    top: 16px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 2147483647 !important;
+    color: #cbd5e1;
+    background: rgba(15, 23, 42, 0.72);
+    border: 1px solid rgba(148, 163, 184, 0.25);
+    padding: 8px 14px;
+    border-radius: 999px;
+    font-size: 13px;
+    max-width: calc(100vw - 40px) !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    white-space: nowrap !important;
+  }
+
+  .controls {
+    position: fixed !important;
+    left: 50% !important;
+    right: auto !important;
+    top: auto !important;
+    bottom: 18px !important;
+    transform: translateX(-50%) !important;
+    z-index: 2147483647 !important;
+    display: flex !important;
+    gap: 10px !important;
+    align-items: center !important;
+    justify-content: center !important;
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    pointer-events: auto !important;
+  }
+
+  .controls button,
+  .slide-counter {
+    white-space: nowrap !important;
+  }
+
+  button {
+    appearance: none !important;
+    -webkit-appearance: none !important;
+    border: 1px solid rgba(148, 163, 184, 0.45) !important;
+    background: rgba(30, 41, 59, 0.96) !important;
+    color: #fff !important;
+    border-radius: 999px !important;
+    padding: 10px 16px !important;
+    cursor: pointer !important;
+    font-weight: 700 !important;
+    font-size: 14px !important;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.36) !important;
+    pointer-events: auto !important;
+  }
+
+  button:hover {
+    background: rgba(37, 99, 235, 0.98) !important;
+  }
+
+  button:disabled {
+    opacity: 0.45 !important;
+    cursor: not-allowed !important;
+  }
+
+  .slide-counter {
+    padding: 10px 16px !important;
+    border-radius: 999px !important;
+    background: rgba(15, 23, 42, 0.96) !important;
+    color: #e2e8f0 !important;
+    border: 1px solid rgba(148, 163, 184, 0.45) !important;
+    font-weight: 700 !important;
+    min-width: 76px !important;
+    text-align: center !important;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.36) !important;
+  }
+
+  .compact-verse-slide .content {
+    max-height: calc(100vh - 135px);
+  }
+
+  .compact-verse-slide h2 {
+    font-size: clamp(30px, 3.8vw, 48px);
+    line-height: 1.08;
+  }
+
+  .compact-verse-slide .divider {
+    margin: 14px 0 18px;
+  }
+
+  .compact-verse-slide .verse {
+    padding: 18px 24px 20px 28px;
+    margin: 14px 0;
+    border-left-width: 9px;
+    font-size: clamp(21px, 2.05vw, 31px);
+    line-height: 1.28;
+  }
+
+  .compact-verse-slide .verse strong {
+    font-size: clamp(22px, 2.25vw, 34px);
+    margin-bottom: 8px;
+  }
+
+  .compact-verse-slide .verse::before {
+    font-size: 32px;
+    top: -13px;
+    right: 18px;
+  }
+
+  .compact-verse-slide p,
+  .compact-verse-slide li {
+    font-size: clamp(16px, 1.3vw, 20px);
+    line-height: 1.35;
+  }
+
+  .compact-verse-slide .main-box {
+    padding: 18px 22px;
+    margin: 16px 0;
+  }
+
+  .small {
+    font-size: clamp(15px, 1.25vw, 19px);
+    color: #cbd5e1;
+  }
+
+  .quote-box {
+    padding: 22px 28px;
+    margin: 22px 0;
+    border-left: 8px solid #f59e0b;
+    background: rgba(15, 23, 42, 0.85);
+    border-radius: 20px;
+    font-size: clamp(22px, 2.2vw, 34px);
+    line-height: 1.35;
+    color: #fff;
+    font-weight: 800;
+  }
+
+  @media (max-width: 900px) {
+    html,
+    body {
+      width: 100%;
+      height: 100%;
+      overflow: hidden !important;
+    }
+
+    .presentation {
+      width: 100vw !important;
+      height: 100vh !important;
+      overflow: hidden !important;
+    }
+
+    .slide {
+      width: 100vw !important;
+      height: 100vh !important;
+      min-height: 100vh !important;
+      position: absolute !important;
+      inset: 0 !important;
+      padding: 42px 28px 82px !important;
+      overflow: hidden !important;
+    }
+
+    .content {
+      max-width: 100% !important;
+      max-height: calc(100vh - 132px);
+    }
+
+    .two-columns,
+    .three-columns {
+      grid-template-columns: 1fr;
+      gap: 12px;
+    }
+
+    .slide-icon {
+      right: 24px;
+      top: 34px;
+      font-size: 44px;
+    }
+
+    .verse {
+      padding: 22px 24px 24px 28px;
+      margin: 20px 0;
+      border-left-width: 9px;
+      font-size: clamp(22px, 5.5vw, 34px);
+    }
+
+    .verse strong {
+      font-size: clamp(24px, 6vw, 38px);
+    }
+
+    .verse::before {
+      font-size: 34px;
+      right: 18px;
+    }
+
+    .controls {
+      left: 50% !important;
+      right: auto !important;
+      bottom: 12px !important;
+      transform: translateX(-50%) !important;
+    }
+
+    button {
+      padding: 9px 12px !important;
+      font-size: 13px !important;
+    }
+
+    .slide-counter {
+      padding: 9px 12px !important;
+      font-size: 13px !important;
+      min-width: 68px !important;
+    }
+
+    .footer {
+      left: 24px;
+      right: 24px;
+      bottom: 60px;
+      font-size: 12px;
+    }
+
+    .hint {
+      display: none;
+    }
+  }
+
+  /* FIX GITHUB PAGES OVERLAY */
+  .presentation,
+  .slide.active {
+    background-color: #020617 !important;
+  }
+
+  body > iframe,
+  body > object,
+  body > embed {
+    display: none !important;
+    visibility: hidden !important;
+    opacity: 0 !important;
+    pointer-events: none !important;
+  }
+
+  body > *:not(.progress):not(.hint):not(.presentation):not(.controls):not(script):not(style) {
+    display: none !important;
+    visibility: hidden !important;
+    opacity: 0 !important;
+    pointer-events: none !important;
+  }
+
+  .slide {
+    z-index: 2147483001 !important;
+  }
+
+  .slide.active .content {
+    position: relative !important;
+    z-index: 2147483002 !important;
+  }
+
+  #controls,
+  .controls,
+  .controls * {
+    box-sizing: border-box !important;
+  }
+
+  #controls {
+    background-color: transparent !important;
+    background: transparent !important;
+    border: 0 !important;
+    outline: 0 !important;
+  }
+
+  .controls::before,
+  .controls::after {
+    content: none !important;
+    display: none !important;
+  }
+
+  button:focus,
+  button:active {
+    outline: none !important;
+    background: rgba(37, 99, 235, 0.98) !important;
+  }
+  </style>
+</head>
+
+<body>
+  <div class="progress" id="progress"></div>
+  <div class="hint">Dùng phím ← → hoặc Space để chuyển slide | F11 để toàn màn hình</div>
+
+  <main class="presentation">
+
+    <section class="slide active title-slide">
+      <div class="content">
+        <h1>Báp-têm Bằng Nước</h1>
+        <p class="subtitle">Chết với Đấng Christ, được chôn với Ngài, và sống đời sống mới trong Ngài</p>
+
+        <div class="verse">
+          <strong>Câu gốc: Cô-lô-se 2:12</strong>
+          “Anh em đã bởi phép báp-têm được chôn với Ngài,
+          thì cũng được sống lại với Ngài bởi đức tin trong quyền phép Đức Chúa Trời,
+          là Đấng đã khiến Ngài từ kẻ chết sống lại.”
+        </div>
+
+        <div class="slide-icon">💧</div>
+      </div>
+      <div class="footer"><span>Báp-têm Bằng Nước</span><span>Slide 1 / 22</span></div>
+    </section>
+
+    <section class="slide">
+      <div class="slide-icon">🎯</div>
+      <div class="content">
+        <h2>Mục tiêu bài học</h2>
+        <div class="divider"></div>
+
+        <ol class="number-list">
+          <li><span>Hiểu báp-têm là gì.</span></li>
+          <li><span>Hiểu vì sao người tin Chúa cần chịu báp-têm.</span></li>
+          <li><span>Hiểu ý nghĩa thuộc linh của báp-têm.</span></li>
+          <li><span>Biết báp-têm nhân danh ai.</span></li>
+          <li><span>Tránh những hiểu lầm thường gặp về báp-têm.</span></li>
+        </ol>
+
+        <div class="main-box">
+          <p>
+            Trọng tâm: <strong>Báp-têm bằng nước là hành động vâng phục công khai
+            của người đã ăn năn và tin Chúa Giê-xu.</strong>
+          </p>
+        </div>
+      </div>
+      <div class="footer"><span>Báp-têm Bằng Nước</span><span>Slide 2 / 22</span></div>
+    </section>
+
+    <section class="slide">
+      <div class="slide-icon">💧</div>
+      <div class="content">
+        <h2>Báp-têm là gì?</h2>
+        <div class="divider"></div>
+
+        <div class="main-box">
+          <p>
+            Từ “báp-têm” trong tiếng Hy Lạp là <strong>baptizō</strong>,
+            có nghĩa là <strong>nhúng chìm, dìm xuống, nhận chìm vào trong</strong>.
+          </p>
+        </div>
+
+        <p>
+          Báp-têm bằng nước là hành động người tin Chúa được
+          <strong>dìm xuống nước</strong> và được <strong>đưa lên khỏi nước</strong>.
+        </p>
+
+        <ul>
+          <li>Đã chết với Đấng Christ.</li>
+          <li>Được chôn với Đấng Christ.</li>
+          <li>Được sống lại với Đấng Christ.</li>
+          <li>Bắt đầu đời sống mới trong Ngài.</li>
+        </ul>
+      </div>
+      <div class="footer"><span>Báp-têm Bằng Nước</span><span>Slide 3 / 22</span></div>
+    </section>
+
+    <section class="slide compact-verse-slide">
+      <div class="slide-icon">📖</div>
+      <div class="content">
+        <h2>Nền tảng Kinh Thánh</h2>
+        <div class="divider"></div>
+
+        <div class="verse">
+          <strong>Rô-ma 6:3-4</strong>
+          “Chúng ta thảy đều đã chịu phép báp-têm trong Đức Chúa Jêsus Christ,
+          tức là chịu phép báp-têm trong sự chết Ngài sao?
+          Vậy chúng ta đã bị chôn với Ngài bởi phép báp-têm trong sự chết Ngài...
+          thì chúng ta cũng sống trong đời mới thể ấy.”
+        </div>
+
+        <div class="verse">
+          <strong>Cô-lô-se 2:12</strong>
+          “Anh em đã bởi phép báp-têm được chôn với Ngài,
+          thì cũng được sống lại với Ngài bởi đức tin...”
+        </div>
+      </div>
+      <div class="footer"><span>Báp-têm Bằng Nước</span><span>Slide 4 / 22</span></div>
+    </section>
+
+    <section class="slide">
+      <div class="slide-icon">🚫</div>
+      <div class="content">
+        <h2>Không chỉ là nghi thức bên ngoài</h2>
+        <div class="divider"></div>
+
+        <div class="main-box">
+          <p>
+            Báp-têm không chỉ là một nghi thức tôn giáo bên ngoài,
+            nhưng là hành động vâng phục bày tỏ một thực tại thuộc linh bên trong.
+          </p>
+        </div>
+
+        <p>
+          Người chịu báp-têm công khai bày tỏ rằng:
+        </p>
+
+        <ul>
+          <li>Tôi đã tin Chúa Giê-xu Christ.</li>
+          <li>Tôi đã thuộc về Ngài.</li>
+          <li>Tôi từ bỏ đời sống cũ.</li>
+          <li>Tôi bắt đầu đời sống mới trong Chúa.</li>
+        </ul>
+      </div>
+      <div class="footer"><span>Báp-têm Bằng Nước</span><span>Slide 5 / 22</span></div>
+    </section>
+
+    <section class="slide compact-verse-slide">
+      <div class="slide-icon">👑</div>
+      <div class="content">
+        <h2>Vì Chúa Giê-xu truyền lệnh</h2>
+        <div class="divider"></div>
+
+        <div class="verse">
+          <strong>Ma-thi-ơ 28:19</strong>
+          “Vậy, hãy đi dạy dỗ muôn dân,
+          hãy nhân danh Đức Cha, Đức Con, và Đức Thánh Linh
+          mà làm phép báp-têm cho họ.”
+        </div>
+
+        <div class="verse">
+          <strong>Giăng 14:15</strong>
+          “Nếu các ngươi yêu mến ta,
+          thì giữ gìn các điều răn ta.”
+        </div>
+
+        <p>
+          Báp-têm không phải là ý kiến riêng của Hội Thánh,
+          nhưng là <span class="main-point">mạng lệnh của Chúa Giê-xu</span>.
+        </p>
+      </div>
+      <div class="footer"><span>Báp-têm Bằng Nước</span><span>Slide 6 / 22</span></div>
+    </section>
+
+    <section class="slide">
+      <div class="slide-icon">🗣️</div>
+      <div class="content">
+        <h2>Công khai xưng nhận đức tin</h2>
+        <div class="divider"></div>
+
+        <div class="verse">
+          <strong>Rô-ma 10:9-10</strong>
+          “Nếu miệng ngươi xưng Đức Chúa Jêsus ra
+          và lòng ngươi tin rằng Đức Chúa Trời đã khiến Ngài từ kẻ chết sống lại,
+          thì ngươi sẽ được cứu...”
+        </div>
+
+        <div class="quote-box">
+          “Tôi tin Chúa Giê-xu. Tôi thuộc về Ngài.
+          Từ nay tôi sống cho Ngài.”
+        </div>
+
+        <p>
+          Đức tin trong lòng cần được bày tỏ ra bằng
+          <strong>sự vâng phục bên ngoài</strong>.
+        </p>
+      </div>
+      <div class="footer"><span>Báp-têm Bằng Nước</span><span>Slide 7 / 22</span></div>
+    </section>
+
+    <section class="slide">
+      <div class="slide-icon">💍</div>
+      <div class="content">
+        <h2>Ví dụ: Đám cưới và nhẫn cưới</h2>
+        <div class="divider"></div>
+
+        <div class="two-columns">
+          <div class="card">
+            <h3>Trong hôn nhân</h3>
+            <p>
+              Một người nam và một người nữ có thể yêu nhau trong lòng,
+              nhưng lễ cưới là sự công khai trước gia đình, Hội Thánh và xã hội.
+            </p>
+            <p>
+              Chiếc nhẫn cưới không tạo ra tình yêu,
+              nhưng bày tỏ sự cam kết công khai của tình yêu đó.
+            </p>
+          </div>
+
+          <div class="card">
+            <h3>Trong báp-têm</h3>
+            <p>
+              Báp-têm không tạo ra đức tin,
+              nhưng bày tỏ công khai rằng người ấy đã tin Chúa,
+              thuộc về Chúa và cam kết sống cho Chúa.
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="footer"><span>Báp-têm Bằng Nước</span><span>Slide 8 / 22</span></div>
+    </section>
+
+    <section class="slide compact-verse-slide">
+      <div class="slide-icon">✝️</div>
+      <div class="content">
+        <h2>Ý nghĩa 1: Chết với Đấng Christ</h2>
+        <div class="divider"></div>
+
+        <div class="verse">
+          <strong>Rô-ma 6:3</strong>
+          “Chúng ta thảy đều đã chịu phép báp-têm trong Đức Chúa Jêsus Christ,
+          tức là chịu phép báp-têm trong sự chết Ngài.”
+        </div>
+
+        <p>Người chịu báp-têm công bố rằng:</p>
+
+        <ul>
+          <li>Tôi chết đối với đời sống cũ.</li>
+          <li>Tôi chết đối với quyền cai trị của tội lỗi.</li>
+          <li>Tôi không còn sống cho bản thân như trước.</li>
+          <li>Tôi thuộc về Đấng Christ.</li>
+        </ul>
+      </div>
+      <div class="footer"><span>Báp-têm Bằng Nước</span><span>Slide 9 / 22</span></div>
+    </section>
+
+    <section class="slide compact-verse-slide">
+      <div class="slide-icon">⚰️</div>
+      <div class="content">
+        <h2>Ý nghĩa 2: Được chôn với Đấng Christ</h2>
+        <div class="divider"></div>
+
+        <div class="verse">
+          <strong>Rô-ma 6:4</strong>
+          “Vậy chúng ta đã bị chôn với Ngài
+          bởi phép báp-têm trong sự chết Ngài...”
+        </div>
+
+        <div class="verse">
+          <strong>Cô-lô-se 2:12</strong>
+          “Anh em đã bởi phép báp-têm được chôn với Ngài...”
+        </div>
+
+        <div class="main-box">
+          <p>
+            Được dìm xuống nước tượng trưng cho việc
+            <strong>con người cũ được chôn</strong>.
+            Đời sống cũ không còn là chủ đời sống người tin nữa.
+          </p>
+        </div>
+      </div>
+      <div class="footer"><span>Báp-têm Bằng Nước</span><span>Slide 10 / 22</span></div>
+    </section>
+
+    <section class="slide compact-verse-slide">
+      <div class="slide-icon">🌅</div>
+      <div class="content">
+        <h2>Ý nghĩa 3: Sống lại trong đời sống mới</h2>
+        <div class="divider"></div>
+
+        <div class="verse">
+          <strong>Rô-ma 6:4</strong>
+          “...hầu cho Đấng Christ nhờ vinh hiển của Cha
+          được từ kẻ chết sống lại thể nào,
+          thì chúng ta cũng sống trong đời mới thể ấy.”
+        </div>
+
+        <div class="verse">
+          <strong>Rô-ma 6:11</strong>
+          “Hãy coi mình như chết về tội lỗi
+          và như sống cho Đức Chúa Trời trong Đức Chúa Jêsus Christ.”
+        </div>
+      </div>
+      <div class="footer"><span>Báp-têm Bằng Nước</span><span>Slide 11 / 22</span></div>
+    </section>
+
+    <section class="slide">
+      <div class="slide-icon">🚶</div>
+      <div class="content">
+        <h2>Ra khỏi nước: bước vào đời sống mới</h2>
+        <div class="divider"></div>
+
+        <p>
+          Khi người tin ra khỏi nước,
+          điều đó tượng trưng cho sự sống lại với Đấng Christ
+          và bắt đầu đời sống mới.
+        </p>
+
+        <div class="two-columns">
+          <div class="card">
+            <h3>Người chịu báp-têm công bố</h3>
+            <ul>
+              <li>Tôi sống cho Đức Chúa Trời.</li>
+              <li>Tôi bước theo Chúa Giê-xu.</li>
+              <li>Tôi không còn thuộc về đời sống cũ.</li>
+              <li>Tôi sống bởi quyền năng phục sinh.</li>
+            </ul>
+          </div>
+
+          <div class="card">
+            <h3>Điều cần nhớ</h3>
+            <p>
+              Báp-têm không phải là kết thúc,
+              nhưng là khởi đầu của hành trình môn đồ hóa.
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="footer"><span>Báp-têm Bằng Nước</span><span>Slide 12 / 22</span></div>
+    </section>
+
+    <section class="slide compact-verse-slide">
+      <div class="slide-icon">📚</div>
+      <div class="content">
+        <h2>Báp-têm là khởi đầu đời sống môn đồ</h2>
+        <div class="divider"></div>
+
+        <div class="verse">
+          <strong>Công vụ 2:41-42</strong>
+          “Những kẻ nhận lời đó đều chịu phép báp-têm...
+          Vả, những người ấy bền lòng giữ lời dạy của các sứ đồ,
+          sự thông công của anh em, lễ bẻ bánh, và sự cầu nguyện.”
+        </div>
+
+        <ul>
+          <li>Tiếp tục học Lời Chúa.</li>
+          <li>Sống bởi Đức Thánh Linh.</li>
+          <li>Từ bỏ tội lỗi.</li>
+          <li>Tham gia Hội Thánh.</li>
+          <li>Tăng trưởng trong sự thánh khiết.</li>
+        </ul>
+      </div>
+      <div class="footer"><span>Báp-têm Bằng Nước</span><span>Slide 13 / 22</span></div>
+    </section>
+
+    <section class="slide compact-verse-slide">
+      <div class="slide-icon">🔺</div>
+      <div class="content">
+        <h2>Báp-têm nhân danh ai?</h2>
+        <div class="divider"></div>
+
+        <div class="verse">
+          <strong>Ma-thi-ơ 28:19</strong>
+          “Hãy nhân danh Đức Cha, Đức Con,
+          và Đức Thánh Linh mà làm phép báp-têm cho họ.”
+        </div>
+
+        <p>
+          “Nhân danh” nghĩa là thuộc về
+          <strong>thẩm quyền, quyền sở hữu và giao ước</strong>
+          với Đức Chúa Trời.
+        </p>
+
+        <div class="three-columns">
+          <div class="card">
+            <h3>Đức Cha</h3>
+            <p>Đấng yêu thương và hoạch định sự cứu rỗi.</p>
+          </div>
+          <div class="card">
+            <h3>Đức Con</h3>
+            <p>Đấng chết và sống lại để cứu chuộc.</p>
+          </div>
+          <div class="card">
+            <h3>Đức Thánh Linh</h3>
+            <p>Đấng tái sinh, thánh hóa và dẫn dắt người tin.</p>
+          </div>
+        </div>
+      </div>
+      <div class="footer"><span>Báp-têm Bằng Nước</span><span>Slide 14 / 22</span></div>
+    </section>
+
+    <section class="slide compact-verse-slide">
+      <div class="slide-icon">⚠️</div>
+      <div class="content">
+        <h2>Hiểu lầm 1: “Báp-têm tự động được cứu”</h2>
+        <div class="divider"></div>
+
+        <div class="verse">
+          <strong>Ê-phê-sô 2:8-9</strong>
+          “Ấy là nhờ ân điển, bởi đức tin, mà anh em được cứu...
+          Ấy chẳng phải bởi việc làm đâu, hầu cho không ai khoe mình.”
+        </div>
+
+        <div class="verse">
+          <strong>1 Giăng 1:7</strong>
+          “Huyết của Đức Chúa Jêsus, Con Ngài,
+          làm sạch mọi tội chúng ta.”
+        </div>
+
+        <p>
+          Không phải nước báp-têm cứu chúng ta.
+          <span class="main-point">Chỉ Chúa Giê-xu Christ cứu chúng ta</span>
+          bởi ân điển, qua đức tin.
+        </p>
+      </div>
+      <div class="footer"><span>Báp-têm Bằng Nước</span><span>Slide 15 / 22</span></div>
+    </section>
+
+    <section class="slide">
+      <div class="slide-icon">🥼</div>
+      <div class="content">
+        <h2>Ví dụ: Áo bác sĩ không làm nên bác sĩ</h2>
+        <div class="divider"></div>
+
+        <div class="main-box">
+          <p>
+            Một người mặc áo bác sĩ nhưng không thật sự là bác sĩ.
+            Chiếc áo không làm cho người đó trở thành bác sĩ.
+          </p>
+        </div>
+
+        <p>
+          Cũng vậy, nghi thức báp-têm bên ngoài
+          không cứu người không có <strong>đức tin thật</strong> bên trong.
+        </p>
+
+        <p>
+          Báp-têm phải đi kèm với <span class="main-point">đức tin</span>
+          và <span class="main-point">sự ăn năn thật</span>.
+        </p>
+      </div>
+      <div class="footer"><span>Báp-têm Bằng Nước</span><span>Slide 16 / 22</span></div>
+    </section>
+
+    <section class="slide compact-verse-slide">
+      <div class="slide-icon">🤔</div>
+      <div class="content">
+        <h2>Hiểu lầm 2: “Tin trong lòng là đủ”</h2>
+        <div class="divider"></div>
+
+        <div class="verse">
+          <strong>Ma-thi-ơ 28:19</strong>
+          “Hãy... làm phép báp-têm cho họ.”
+        </div>
+
+        <div class="verse">
+          <strong>Gia-cơ 2:17</strong>
+          “Nếu đức tin không sanh ra việc làm,
+          thì tự mình nó chết.”
+        </div>
+
+        <p>
+          Đúng là chúng ta được cứu bởi đức tin,
+          nhưng <strong>đức tin thật dẫn đến sự vâng phục</strong>.
+        </p>
+
+        <div class="main-box">
+          <p>
+            Báp-têm không tạo ra đức tin,
+            nhưng bày tỏ sự vâng phục và cam kết công khai
+            của người đã tin Chúa.
+          </p>
+        </div>
+      </div>
+      <div class="footer"><span>Báp-têm Bằng Nước</span><span>Slide 17 / 22</span></div>
+    </section>
+
+    <section class="slide compact-verse-slide">
+      <div class="slide-icon">⛓️</div>
+      <div class="content">
+        <h2>Hiểu lầm 3: “Báp-têm rồi muốn sống sao cũng được”</h2>
+        <div class="divider"></div>
+
+        <div class="verse">
+          <strong>Rô-ma 6:1-2</strong>
+          “Chúng ta phải cứ ở trong tội lỗi,
+          hầu cho ân điển được dư dật chăng?
+          Chẳng hề như vậy!”
+        </div>
+
+        <div class="verse">
+          <strong>Rô-ma 6:11</strong>
+          “Hãy coi mình như chết về tội lỗi
+          và như sống cho Đức Chúa Trời trong Đức Chúa Jêsus Christ.”
+        </div>
+
+        <p>
+          Báp-têm không phải là giấy phép để tiếp tục sống trong tội lỗi,
+          nhưng là tuyên bố rằng con người cũ đã chết.
+        </p>
+      </div>
+      <div class="footer"><span>Báp-têm Bằng Nước</span><span>Slide 18 / 22</span></div>
+    </section>
+
+    <section class="slide">
+      <div class="slide-icon">🚪</div>
+      <div class="content">
+        <h2>Ví dụ: Ra khỏi tù nhưng không quay lại lối cũ</h2>
+        <div class="divider"></div>
+
+        <div class="main-box">
+          <p>
+            Một người được ra khỏi tù mà lại cố tình quay về lối sống phạm pháp cũ
+            thì người ấy không hiểu ý nghĩa của sự tự do.
+          </p>
+        </div>
+
+        <p>
+          Cũng vậy, người đã chịu báp-têm không nên quay lại làm nô lệ cho tội lỗi,
+          nhưng phải <strong>sống đời sống mới trong Chúa</strong>.
+        </p>
+      </div>
+      <div class="footer"><span>Báp-têm Bằng Nước</span><span>Slide 19 / 22</span></div>
+    </section>
+
+    <section class="slide compact-verse-slide">
+      <div class="slide-icon">🌱</div>
+      <div class="content">
+        <h2>Hiểu lầm 4: “Phải hoàn hảo mới được báp-têm”</h2>
+        <div class="divider"></div>
+
+        <div class="verse">
+          <strong>Công vụ 2:38</strong>
+          “Hãy hối cải... chịu phép báp-têm...”
+        </div>
+
+        <div class="verse">
+          <strong>Phi-líp 1:6</strong>
+          “Đấng đã khởi làm việc lành trong anh em,
+          sẽ làm trọn hết cho đến ngày của Đức Chúa Jêsus Christ.”
+        </div>
+
+        <p>
+          Báp-têm không dành cho người hoàn hảo,
+          nhưng dành cho người đã <strong>ăn năn, tin Chúa</strong>
+          và muốn bước theo Ngài.
+        </p>
+      </div>
+      <div class="footer"><span>Báp-têm Bằng Nước</span><span>Slide 20 / 22</span></div>
+    </section>
+
+    <section class="slide">
+      <div class="slide-icon">🏫</div>
+      <div class="content">
+        <h2>Ví dụ: Vào trường để học và trưởng thành</h2>
+        <div class="divider"></div>
+
+        <div class="main-box">
+          <p>
+            Một học sinh không cần phải biết hết mọi bài học mới được vào trường.
+            Em vào trường để bắt đầu học và trưởng thành.
+          </p>
+        </div>
+
+        <p>
+          Cũng vậy, người tin không cần hoàn hảo mới chịu báp-têm.
+          Báp-têm là bước khởi đầu để tiếp tục <strong>lớn lên trong Chúa</strong>.
+        </p>
+      </div>
+      <div class="footer"><span>Báp-têm Bằng Nước</span><span>Slide 21 / 22</span></div>
+    </section>
+
+    <section class="slide compact-verse-slide">
+      <div class="slide-icon">🌊</div>
+      <div class="content">
+        <h2>Tóm tắt bài học</h2>
+        <div class="divider"></div>
+
+        <div class="main-box">
+          <p>
+            Báp-têm bằng nước là hành động vâng phục của người đã ăn năn
+            và tin Chúa Giê-xu.
+          </p>
+          <p>
+            Qua báp-têm, người tin công khai tuyên bố rằng mình đã
+            <strong>chết với Đấng Christ</strong>,
+            <strong>được chôn với Ngài</strong>,
+            và <strong>sống lại để bước đi trong đời sống mới</strong>.
+          </p>
+        </div>
+
+        <ul>
+          <li>Là mạng lệnh của Chúa Giê-xu.</li>
+          <li>Là sự công khai xưng nhận đức tin.</li>
+          <li>Là hình ảnh chết, chôn và sống lại với Đấng Christ.</li>
+          <li>Là khởi đầu đời sống môn đồ.</li>
+          <li>Được thực hiện nhân danh Đức Cha, Đức Con và Đức Thánh Linh.</li>
+        </ul>
+
+        <div class="quote-box">
+          “Tôi đã từ bỏ đời sống cũ. Tôi thuộc về Chúa Giê-xu Christ.
+          Từ nay tôi sống cho Đức Chúa Trời.”
+        </div>
+      </div>
+      <div class="footer"><span>Báp-têm Bằng Nước</span><span>Slide 22 / 22</span></div>
+    </section>
+
+  </main>
+
+  <div class="controls" id="controls">
+    <button type="button" id="prevBtn">◀ Trước</button>
+    <div class="slide-counter" id="counter">1 / 22</div>
+    <button type="button" id="nextBtn">Sau ▶</button>
+  </div>
+
+  <script>
+  const slides = Array.from(document.querySelectorAll(".slide"));
+  const counter = document.getElementById("counter");
+  const progress = document.getElementById("progress");
+  const prevBtn = document.getElementById("prevBtn");
+  const nextBtn = document.getElementById("nextBtn");
+
+  let currentSlide = 0;
+
+  function updateSlide() {
+    slides.forEach((slide, index) => {
+      slide.classList.toggle("active", index === currentSlide);
+    });
+
+    counter.textContent = `${currentSlide + 1} / ${slides.length}`;
+
+    if (progress) {
+      progress.style.width = `${((currentSlide + 1) / slides.length) * 100}%`;
+    }
+
+    document.querySelectorAll(".footer").forEach((footer, index) => {
+      const spans = footer.querySelectorAll("span");
+      if (spans[1]) {
+        spans[1].textContent = `Slide ${index + 1} / ${slides.length}`;
+      }
+    });
+
+    if (prevBtn) {
+      prevBtn.disabled = currentSlide === 0;
+    }
+
+    if (nextBtn) {
+      nextBtn.disabled = currentSlide === slides.length - 1;
+    }
+  }
+
+  function nextSlide() {
+    if (currentSlide < slides.length - 1) {
+      currentSlide++;
+      updateSlide();
+    }
+  }
+
+  function prevSlide() {
+    if (currentSlide > 0) {
+      currentSlide--;
+      updateSlide();
+    }
+  }
+
+  if (prevBtn) {
+    prevBtn.addEventListener("click", function(event) {
+      event.preventDefault();
+      prevSlide();
+    });
+  }
+
+  if (nextBtn) {
+    nextBtn.addEventListener("click", function(event) {
+      event.preventDefault();
+      nextSlide();
+    });
+  }
+
+  document.addEventListener("keydown", function(event) {
+    if (
+      event.key === "ArrowRight" ||
+      event.key === " " ||
+      event.key === "PageDown"
+    ) {
+      event.preventDefault();
+      nextSlide();
+    }
+
+    if (
+      event.key === "ArrowLeft" ||
+      event.key === "PageUp"
+    ) {
+      event.preventDefault();
+      prevSlide();
+    }
+
+    if (event.key === "Home") {
+      currentSlide = 0;
+      updateSlide();
+    }
+
+    if (event.key === "End") {
+      currentSlide = slides.length - 1;
+      updateSlide();
+    }
+  });
+
+  window.nextSlide = nextSlide;
+  window.prevSlide = prevSlide;
+
+  updateSlide();
+  </script>
+</body>
+</html>
